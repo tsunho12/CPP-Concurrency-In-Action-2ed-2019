@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{interruptible\PYGZus{}thread}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{FunctionType}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{n}{interruptible\PYGZus{}thread}\PYG{p}{(}\PYG{n}{FunctionType}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{detach}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{joinable}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{interrupt}\PYG{p}{();}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

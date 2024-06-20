@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Args}\PYG{o}{\PYGZgt{}}
+\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{count\PYGZus{}args}\PYG{p}{(}\PYG{n}{Args}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{k}{sizeof}\PYG{p}{...}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Args}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

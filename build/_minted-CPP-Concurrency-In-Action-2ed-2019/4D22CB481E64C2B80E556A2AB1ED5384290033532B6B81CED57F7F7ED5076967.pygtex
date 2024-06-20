@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{bounds}\PYG{o}{=}\PYG{l+m+mi}{99}\PYG{p}{;}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{array}\PYG{p}{[}\PYG{n}{bounds}\PYG{p}{];}\PYG{+w}{  }\PYG{c+c1}{// 错误，bounds不是一个常量表达式}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{bounds2}\PYG{o}{=}\PYG{l+m+mi}{99}\PYG{p}{;}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{array2}\PYG{p}{[}\PYG{n}{bounds2}\PYG{p}{];}\PYG{+w}{  }\PYG{c+c1}{// 正确，bounds2是一个常量表达式}
+\end{Verbatim}

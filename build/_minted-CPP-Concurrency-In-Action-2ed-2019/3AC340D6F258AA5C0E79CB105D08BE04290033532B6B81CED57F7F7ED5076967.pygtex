@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{[]\PYGZob{}}\PYG{+w}{  }\PYG{c+c1}{// Lambda表达式以[]开始}
+\PYG{+w}{  }\PYG{n}{do\PYGZus{}stuff}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{do\PYGZus{}more\PYGZus{}stuff}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}();}\PYG{+w}{  }\PYG{c+c1}{// 表达式结束，可以直接调用}
+\end{Verbatim}

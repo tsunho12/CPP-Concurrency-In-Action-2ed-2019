@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{messaging}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{sender}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{queue}\PYG{o}{*}\PYG{n}{q}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// sender是一个队列指针的包装类}
+\PYG{+w}{  }\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{sender}\PYG{p}{()}\PYG{o}{:}\PYG{+w}{  }\PYG{c+c1}{// sender无队列(默认构造函数)}
+\PYG{+w}{      }\PYG{n}{q}\PYG{p}{(}\PYG{k}{nullptr}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{sender}\PYG{p}{(}\PYG{n}{queue}\PYG{o}{*}\PYG{n}{q\PYGZus{}}\PYG{p}{)}\PYG{o}{:}\PYG{+w}{  }\PYG{c+c1}{// 从指向队列的指针进行构造}
+\PYG{+w}{      }\PYG{n}{q}\PYG{p}{(}\PYG{n}{q\PYGZus{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Message}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{send}\PYG{p}{(}\PYG{n}{Message}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{q}\PYG{p}{)}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{q}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{push}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 将发送信息推送给队列}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{};}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

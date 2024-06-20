@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Params}\PYG{o}{\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{dummy3}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{tuple}\PYG{o}{\PYGZlt{}}\PYG{n}{Params}\PYG{o}{*}\PYG{+w}{ }\PYG{p}{...}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pointers}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{tuple}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{Params}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{p}{...}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{unique\PYGZus{}pointers}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

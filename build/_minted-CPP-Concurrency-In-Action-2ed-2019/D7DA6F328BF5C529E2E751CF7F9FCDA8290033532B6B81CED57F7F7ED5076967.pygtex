@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{interruption\PYGZus{}point}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{this\PYGZus{}thread\PYGZus{}interrupt\PYGZus{}flag}\PYG{p}{.}\PYG{n}{is\PYGZus{}set}\PYG{p}{())}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{thread\PYGZus{}interrupted}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

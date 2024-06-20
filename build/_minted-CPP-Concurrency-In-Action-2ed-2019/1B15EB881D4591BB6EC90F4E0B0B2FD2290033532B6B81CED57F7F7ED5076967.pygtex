@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{interruptible\PYGZus{}wait}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{condition\PYGZus{}variable}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{cv}\PYG{p}{,}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{interruption\PYGZus{}point}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{this\PYGZus{}thread\PYGZus{}interrupt\PYGZus{}flag}\PYG{p}{.}\PYG{n}{set\PYGZus{}condition\PYGZus{}variable}\PYG{p}{(}\PYG{n}{cv}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{cv}\PYG{p}{.}\PYG{n}{wait}\PYG{p}{(}\PYG{n}{lk}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{n}{this\PYGZus{}thread\PYGZus{}interrupt\PYGZus{}flag}\PYG{p}{.}\PYG{n}{clear\PYGZus{}condition\PYGZus{}variable}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{  }\PYG{n}{interruption\PYGZus{}point}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{X}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{do\PYGZus{}lengthy\PYGZus{}work}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{);}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{X}\PYG{+w}{ }\PYG{n}{my\PYGZus{}x}\PYG{p}{;}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{num}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{t}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{X}\PYG{o}{::}\PYG{n}{do\PYGZus{}lengthy\PYGZus{}work}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{num}\PYG{p}{);}
+\end{Verbatim}

@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{CX}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{CX}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{default}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{CX}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{b\PYGZus{}}\PYG{p}{)}\PYG{o}{:}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{n}{a}\PYG{p}{(}\PYG{n}{a\PYGZus{}}\PYG{p}{),}\PYG{n}{b}\PYG{p}{(}\PYG{n}{b\PYGZus{}}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{get\PYGZus{}a}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{get\PYGZus{}b}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{foo}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{a}\PYG{o}{+}\PYG{n}{b}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

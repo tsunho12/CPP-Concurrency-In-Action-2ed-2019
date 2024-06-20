@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{my\PYGZus{}class}\PYG{p}{;}
+\PYG{n}{my\PYGZus{}class}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}my\PYGZus{}class\PYGZus{}instance}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{my\PYGZus{}class}\PYG{+w}{ }\PYG{n}{instance}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 线程安全的初始化过程}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{instance}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

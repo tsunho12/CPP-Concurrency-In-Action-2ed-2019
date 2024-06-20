@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZgt{}=}\PYG{p}{(}
+\PYG{+w}{   }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{   }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+\end{Verbatim}

@@ -1,0 +1,100 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Key}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Value}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Hash}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{hash}\PYG{o}{\PYGZlt{}}\PYG{n}{Key}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{threadsafe\PYGZus{}lookup\PYGZus{}table}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{bucket\PYGZus{}type}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{    }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{n}{Key}\PYG{p}{,}\PYG{n}{Value}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{bucket\PYGZus{}value}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{bucket\PYGZus{}value}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{bucket\PYGZus{}data}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{typedef}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{bucket\PYGZus{}data}\PYG{o}{::}\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{bucket\PYGZus{}iterator}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{bucket\PYGZus{}data}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{mutable}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{+w}{ }\PYG{n}{mutex}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+
+\PYG{+w}{    }\PYG{n}{bucket\PYGZus{}iterator}\PYG{+w}{ }\PYG{n}{find\PYGZus{}entry\PYGZus{}for}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{find\PYGZus{}if}\PYG{p}{(}\PYG{n}{data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{      }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{bucket\PYGZus{}value}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{item}\PYG{p}{)}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{item}\PYG{p}{.}\PYG{n}{first}\PYG{o}{==}\PYG{n}{key}\PYG{p}{;\PYGZcb{});}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{Value}\PYG{+w}{ }\PYG{n}{value\PYGZus{}for}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{,}\PYG{n}{Value}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{default\PYGZus{}value}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{mutex}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{      }\PYG{n}{bucket\PYGZus{}iterator}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{found\PYGZus{}entry}\PYG{o}{=}\PYG{n}{find\PYGZus{}entry\PYGZus{}for}\PYG{p}{(}\PYG{n}{key}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{found\PYGZus{}entry}\PYG{o}{==}\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}\PYG{o}{?}
+\PYG{+w}{        }\PYG{n+nl}{default\PYGZus{}value}\PYG{p}{:}\PYG{n}{found\PYGZus{}entry}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{second}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{add\PYGZus{}or\PYGZus{}update\PYGZus{}mapping}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{,}\PYG{n}{Value}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{mutex}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{      }\PYG{n}{bucket\PYGZus{}iterator}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{found\PYGZus{}entry}\PYG{o}{=}\PYG{n}{find\PYGZus{}entry\PYGZus{}for}\PYG{p}{(}\PYG{n}{key}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{found\PYGZus{}entry}\PYG{o}{==}\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{data}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{bucket\PYGZus{}value}\PYG{p}{(}\PYG{n}{key}\PYG{p}{,}\PYG{n}{value}\PYG{p}{));}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{k}{else}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{found\PYGZus{}entry}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{second}\PYG{o}{=}\PYG{n}{value}\PYG{p}{;}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{remove\PYGZus{}mapping}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{mutex}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{      }\PYG{n}{bucket\PYGZus{}iterator}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{found\PYGZus{}entry}\PYG{o}{=}\PYG{n}{find\PYGZus{}entry\PYGZus{}for}\PYG{p}{(}\PYG{n}{key}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{found\PYGZus{}entry}\PYG{o}{!=}\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{data}\PYG{p}{.}\PYG{n}{erase}\PYG{p}{(}\PYG{n}{found\PYGZus{}entry}\PYG{p}{);}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{};}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{bucket\PYGZus{}type}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{buckets}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{  }\PYG{n}{Hash}\PYG{+w}{ }\PYG{n}{hasher}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{bucket\PYGZus{}type}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{get\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{bucket\PYGZus{}index}\PYG{o}{=}\PYG{n}{hasher}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}\PYG{o}{\PYGZpc{}}\PYG{n}{buckets}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{buckets}\PYG{p}{[}\PYG{n}{bucket\PYGZus{}index}\PYG{p}{];}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Key}\PYG{+w}{ }\PYG{n}{key\PYGZus{}type}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Value}\PYG{+w}{ }\PYG{n}{mapped\PYGZus{}type}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Hash}\PYG{+w}{ }\PYG{n}{hash\PYGZus{}type}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}lookup\PYGZus{}table}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{num\PYGZus{}buckets}\PYG{o}{=}\PYG{l+m+mi}{19}\PYG{p}{,}\PYG{n}{Hash}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{hasher\PYGZus{}}\PYG{o}{=}\PYG{n}{Hash}\PYG{p}{())}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{buckets}\PYG{p}{(}\PYG{n}{num\PYGZus{}buckets}\PYG{p}{),}\PYG{n}{hasher}\PYG{p}{(}\PYG{n}{hasher\PYGZus{}}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{num\PYGZus{}buckets}\PYG{p}{;}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{buckets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{reset}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{bucket\PYGZus{}type}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}lookup\PYGZus{}table}\PYG{p}{(}\PYG{n}{threadsafe\PYGZus{}lookup\PYGZus{}table}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{o}{=}\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}lookup\PYGZus{}table}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}
+\PYG{+w}{    }\PYG{n}{threadsafe\PYGZus{}lookup\PYGZus{}table}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{o}{=}\PYG{k}{delete}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{Value}\PYG{+w}{ }\PYG{n+nf}{value\PYGZus{}for}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{,}
+\PYG{+w}{                  }\PYG{n}{Value}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{default\PYGZus{}value}\PYG{o}{=}\PYG{n}{Value}\PYG{p}{())}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{get\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{key}\PYG{p}{).}\PYG{n}{value\PYGZus{}for}\PYG{p}{(}\PYG{n}{key}\PYG{p}{,}\PYG{n}{default\PYGZus{}value}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 8}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{add\PYGZus{}or\PYGZus{}update\PYGZus{}mapping}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{,}\PYG{n}{Value}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{get\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{key}\PYG{p}{).}\PYG{n}{add\PYGZus{}or\PYGZus{}update\PYGZus{}mapping}\PYG{p}{(}\PYG{n}{key}\PYG{p}{,}\PYG{n}{value}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 9}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{remove\PYGZus{}mapping}\PYG{p}{(}\PYG{n}{Key}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{get\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{key}\PYG{p}{).}\PYG{n}{remove\PYGZus{}mapping}\PYG{p}{(}\PYG{n}{key}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 10}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

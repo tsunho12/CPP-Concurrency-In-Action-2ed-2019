@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{update\PYGZus{}data\PYGZus{}for\PYGZus{}widget}\PYG{p}{(}\PYG{n}{widget\PYGZus{}id}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{,}\PYG{n}{widget\PYGZus{}data}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{oops\PYGZus{}again}\PYG{p}{(}\PYG{n}{widget\PYGZus{}id}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{widget\PYGZus{}data}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{(}\PYG{n}{update\PYGZus{}data\PYGZus{}for\PYGZus{}widget}\PYG{p}{,}\PYG{n}{w}\PYG{p}{,}\PYG{n}{data}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{n}{display\PYGZus{}status}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{t}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{process\PYGZus{}widget\PYGZus{}data}\PYG{p}{(}\PYG{n}{data}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

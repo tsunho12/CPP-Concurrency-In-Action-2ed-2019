@@ -1,0 +1,52 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Iterator}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{accumulate\PYGZus{}block}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{operator}\PYG{p}{()(}\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{first}\PYG{p}{,}\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{last}\PYG{p}{,}\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{result}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{accumulate}\PYG{p}{(}\PYG{n}{first}\PYG{p}{,}\PYG{n}{last}\PYG{p}{,}\PYG{n}{result}\PYG{p}{);}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Iterator}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{n}{T}\PYG{+w}{ }\PYG{n}{parallel\PYGZus{}accumulate}\PYG{p}{(}\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{first}\PYG{p}{,}\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{last}\PYG{p}{,}\PYG{n}{T}\PYG{+w}{ }\PYG{n}{init}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{length}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{distance}\PYG{p}{(}\PYG{n}{first}\PYG{p}{,}\PYG{n}{last}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{length}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{init}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{min\PYGZus{}per\PYGZus{}thread}\PYG{o}{=}\PYG{l+m+mi}{25}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{max\PYGZus{}threads}\PYG{o}{=}
+\PYG{+w}{      }\PYG{p}{(}\PYG{n}{length}\PYG{o}{+}\PYG{n}{min\PYGZus{}per\PYGZus{}thread}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{)}\PYG{o}{/}\PYG{n}{min\PYGZus{}per\PYGZus{}thread}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 2}
+
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{hardware\PYGZus{}threads}\PYG{o}{=}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{hardware\PYGZus{}concurrency}\PYG{p}{();}
+
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{num\PYGZus{}threads}\PYG{o}{=}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{min}\PYG{p}{(}\PYG{n}{hardware\PYGZus{}threads}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{?}\PYG{+w}{ }\PYG{n}{hardware\PYGZus{}threads}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{max\PYGZus{}threads}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{block\PYGZus{}size}\PYG{o}{=}\PYG{n}{length}\PYG{o}{/}\PYG{n}{num\PYGZus{}threads}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 4}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{results}\PYG{p}{(}\PYG{n}{num\PYGZus{}threads}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{threads}\PYG{p}{(}\PYG{n}{num\PYGZus{}threads}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 5}
+
+\PYG{+w}{  }\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{block\PYGZus{}start}\PYG{o}{=}\PYG{n}{first}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{num\PYGZus{}threads}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{);}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{block\PYGZus{}end}\PYG{o}{=}\PYG{n}{block\PYGZus{}start}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{advance}\PYG{p}{(}\PYG{n}{block\PYGZus{}end}\PYG{p}{,}\PYG{n}{block\PYGZus{}size}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{    }\PYG{n}{threads}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{p}{(}\PYG{+w}{     }\PYG{c+c1}{// 7}
+\PYG{+w}{        }\PYG{n}{accumulate\PYGZus{}block}\PYG{o}{\PYGZlt{}}\PYG{n}{Iterator}\PYG{p}{,}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{(),}
+\PYG{+w}{        }\PYG{n}{block\PYGZus{}start}\PYG{p}{,}\PYG{n}{block\PYGZus{}end}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ref}\PYG{p}{(}\PYG{n}{results}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]));}
+\PYG{+w}{    }\PYG{n}{block\PYGZus{}start}\PYG{o}{=}\PYG{n}{block\PYGZus{}end}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 8}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{accumulate\PYGZus{}block}\PYG{o}{\PYGZlt{}}\PYG{n}{Iterator}\PYG{p}{,}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{()(}
+\PYG{+w}{      }\PYG{n}{block\PYGZus{}start}\PYG{p}{,}\PYG{n}{last}\PYG{p}{,}\PYG{n}{results}\PYG{p}{[}\PYG{n}{num\PYGZus{}threads}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{]);}\PYG{+w}{ }\PYG{c+c1}{// 9}
+
+\PYG{+w}{  }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{auto}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{entry}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{threads}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{entry}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 10}
+
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{accumulate}\PYG{p}{(}\PYG{n}{results}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{results}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}\PYG{n}{init}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 11}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

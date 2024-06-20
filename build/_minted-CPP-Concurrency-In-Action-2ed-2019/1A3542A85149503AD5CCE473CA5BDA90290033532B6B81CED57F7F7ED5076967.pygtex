@@ -1,0 +1,75 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period}\PYG{o}{=}\PYG{n}{ratio}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{duration}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Rep}\PYG{+w}{ }\PYG{n}{rep}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Period}\PYG{+w}{ }\PYG{n}{period}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{default}\PYG{p}{;}
+\PYG{+w}{  }\PYG{o}{\PYGZti{}}\PYG{n}{duration}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{default}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{duration}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{default}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{default}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{duration}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Rep2}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{r}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{rep}\PYG{+w}{ }\PYG{n+nf}{count}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{+}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{++}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{++}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{+=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{*=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{rep}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{/=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{rep}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZpc{}=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{rep}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZpc{}=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{+w}{ }\PYG{n+nf}{zero}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{+w}{ }\PYG{n+nf}{min}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{duration}\PYG{+w}{ }\PYG{n+nf}{max}\PYG{p}{();}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{!=}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZlt{}}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZlt{}=}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZgt{}=}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period1}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{ToDuration}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{ToDuration}\PYG{+w}{ }\PYG{n}{duration\PYGZus{}cast}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+\end{Verbatim}

@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{edit\PYGZus{}document}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{filename}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{open\PYGZus{}document\PYGZus{}and\PYGZus{}display\PYGZus{}gui}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{done\PYGZus{}editing}\PYG{p}{())}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{user\PYGZus{}command}\PYG{+w}{ }\PYG{n}{cmd}\PYG{o}{=}\PYG{n}{get\PYGZus{}user\PYGZus{}input}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{cmd}\PYG{p}{.}\PYG{n}{type}\PYG{o}{==}\PYG{n}{open\PYGZus{}new\PYGZus{}document}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{new\PYGZus{}name}\PYG{o}{=}\PYG{n}{get\PYGZus{}filename\PYGZus{}from\PYGZus{}user}\PYG{p}{();}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{(}\PYG{n}{edit\PYGZus{}document}\PYG{p}{,}\PYG{n}{new\PYGZus{}name}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{      }\PYG{n}{t}\PYG{p}{.}\PYG{n}{detach}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{       }\PYG{n}{process\PYGZus{}user\PYGZus{}input}\PYG{p}{(}\PYG{n}{cmd}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

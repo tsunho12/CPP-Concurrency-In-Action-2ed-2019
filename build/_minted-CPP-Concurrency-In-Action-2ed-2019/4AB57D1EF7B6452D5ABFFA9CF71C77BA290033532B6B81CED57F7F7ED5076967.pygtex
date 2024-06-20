@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{dummy}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{array}\PYG{p}{[}\PYG{n}{square}\PYG{p}{(}\PYG{n}{dummy}\PYG{p}{)];}\PYG{+w}{  }\PYG{c+c1}{// 错误，dummy不是常数表达式}
+\end{Verbatim}

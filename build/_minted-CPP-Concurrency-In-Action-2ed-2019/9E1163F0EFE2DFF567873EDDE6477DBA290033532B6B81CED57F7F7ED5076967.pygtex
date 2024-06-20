@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{some\PYGZus{}array}\PYG{p}{[}\PYG{l+m+mi}{45}\PYG{p}{];}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{p}\PYG{o}{=}\PYG{n}{some\PYGZus{}array}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// int*}
+\PYG{k+kt}{int}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{r}\PYG{o}{=*}\PYG{n}{p}\PYG{p}{;}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{=}\PYG{n}{r}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// int}
+\PYG{k}{auto}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{y}\PYG{o}{=}\PYG{n}{r}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// int\PYGZam{}}
+\end{Verbatim}

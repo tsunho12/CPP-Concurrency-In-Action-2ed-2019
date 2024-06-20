@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ratio}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1000}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{ms}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 5毫秒}
+\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ratio}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{(}\PYG{n}{ms}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 错误：不能将ms当做s进行存储}
+\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ratio}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{s2}\PYG{p}{(}\PYG{n}{ms}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 合法：s2.count() == 0.005}
+\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ration}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1000000}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{us}\PYG{o}{\PYGZlt{}}\PYG{n}{ms}\PYG{o}{\PYGZgt{}}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 合法:us.count() == 5000}
+\end{Verbatim}

@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{config\PYGZus{}mutex}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{interruptible\PYGZus{}thread}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{background\PYGZus{}threads}\PYG{p}{;}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{background\PYGZus{}thread}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{disk\PYGZus{}id}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{n+nb}{true}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{interruption\PYGZus{}point}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{    }\PYG{n}{fs\PYGZus{}change}\PYG{+w}{ }\PYG{n}{fsc}\PYG{o}{=}\PYG{n}{get\PYGZus{}fs\PYGZus{}changes}\PYG{p}{(}\PYG{n}{disk\PYGZus{}id}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{fsc}\PYG{p}{.}\PYG{n}{has\PYGZus{}changes}\PYG{p}{())}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{update\PYGZus{}index}\PYG{p}{(}\PYG{n}{fsc}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{start\PYGZus{}background\PYGZus{}processing}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{background\PYGZus{}threads}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}
+\PYG{+w}{    }\PYG{n}{interruptible\PYGZus{}thread}\PYG{p}{(}\PYG{n}{background\PYGZus{}thread}\PYG{p}{,}\PYG{n}{disk\PYGZus{}1}\PYG{p}{));}
+\PYG{+w}{  }\PYG{n}{background\PYGZus{}threads}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}
+\PYG{+w}{    }\PYG{n}{interruptible\PYGZus{}thread}\PYG{p}{(}\PYG{n}{background\PYGZus{}thread}\PYG{p}{,}\PYG{n}{disk\PYGZus{}2}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{start\PYGZus{}background\PYGZus{}processing}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{n}{process\PYGZus{}gui\PYGZus{}until\PYGZus{}exit}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{config\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{background\PYGZus{}threads}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{background\PYGZus{}threads}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{interrupt}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{background\PYGZus{}threads}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{background\PYGZus{}threads}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{join}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 7}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{increase\PYGZus{}head\PYGZus{}count}\PYG{p}{(}\PYG{n}{counted\PYGZus{}node\PYGZus{}ptr}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{old\PYGZus{}counter}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{counted\PYGZus{}node\PYGZus{}ptr}\PYG{+w}{ }\PYG{n}{new\PYGZus{}counter}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{do}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{new\PYGZus{}counter}\PYG{o}{=}\PYG{n}{old\PYGZus{}counter}\PYG{p}{;}
+\PYG{+w}{    }\PYG{o}{++}\PYG{n}{new\PYGZus{}counter}\PYG{p}{.}\PYG{n}{external\PYGZus{}count}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{head}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}strong}\PYG{p}{(}\PYG{n}{old\PYGZus{}counter}\PYG{p}{,}\PYG{n}{new\PYGZus{}counter}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}acquire}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{));}
+
+\PYG{+w}{  }\PYG{n}{old\PYGZus{}counter}\PYG{p}{.}\PYG{n}{external\PYGZus{}count}\PYG{o}{=}\PYG{n}{new\PYGZus{}counter}\PYG{p}{.}\PYG{n}{external\PYGZus{}count}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

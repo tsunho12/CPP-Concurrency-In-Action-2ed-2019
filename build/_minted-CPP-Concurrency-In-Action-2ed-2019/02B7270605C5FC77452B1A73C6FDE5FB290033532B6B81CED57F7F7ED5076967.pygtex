@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{result\PYGZus{}chunk}\PYG{+w}{ }\PYG{n+nf}{process}\PYG{p}{(}\PYG{n}{data\PYGZus{}chunk}\PYG{p}{);}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{data\PYGZus{}chunk}\PYG{o}{\PYGZgt{}}
+\PYG{n}{divide\PYGZus{}into\PYGZus{}chunks}\PYG{p}{(}\PYG{n}{data\PYGZus{}block}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{num\PYGZus{}threads}\PYG{p}{);}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{process\PYGZus{}data}\PYG{p}{(}\PYG{n}{data\PYGZus{}source}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{source}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{data\PYGZus{}sink}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{sink}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{concurrency}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{hardware\PYGZus{}concurrency}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{num\PYGZus{}threads}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{concurrency}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{?}\PYG{+w}{ }\PYG{n}{concurrency}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{barrier}\PYG{+w}{ }\PYG{n}{sync}\PYG{p}{(}\PYG{n}{num\PYGZus{}threads}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{joining\PYGZus{}thread}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{threads}\PYG{p}{(}\PYG{n}{num\PYGZus{}threads}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{data\PYGZus{}chunk}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{chunks}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{result\PYGZus{}block}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{num\PYGZus{}threads}\PYG{p}{;}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{threads}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{joining\PYGZus{}thread}\PYG{p}{([}\PYG{o}{\PYGZam{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{source}\PYG{p}{.}\PYG{n}{done}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 6}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{+w}{          }\PYG{n}{data\PYGZus{}block}\PYG{+w}{ }\PYG{n}{current\PYGZus{}block}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{            }\PYG{n}{source}\PYG{p}{.}\PYG{n}{get\PYGZus{}next\PYGZus{}data\PYGZus{}block}\PYG{p}{();}
+\PYG{+w}{            }\PYG{n}{chunks}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{divide\PYGZus{}into\PYGZus{}chunks}\PYG{p}{(}
+\PYG{+w}{              }\PYG{n}{current\PYGZus{}block}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{num\PYGZus{}threads}\PYG{p}{);}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{sync}\PYG{p}{.}\PYG{n}{arrive\PYGZus{}and\PYGZus{}wait}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 2}
+\PYG{+w}{        }\PYG{n}{result}\PYG{p}{.}\PYG{n}{set\PYGZus{}chunk}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{num\PYGZus{}threads}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{process}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]));}\PYG{+w}{ }\PYG{c+c1}{// 3}
+\PYG{+w}{        }\PYG{n}{sync}\PYG{p}{.}\PYG{n}{arrive\PYGZus{}and\PYGZus{}wait}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 4}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 5}
+\PYG{+w}{          }\PYG{n}{sink}\PYG{p}{.}\PYG{n}{write\PYGZus{}data}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{result}\PYG{p}{));}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{c+c1}{// 7}
+\end{Verbatim}

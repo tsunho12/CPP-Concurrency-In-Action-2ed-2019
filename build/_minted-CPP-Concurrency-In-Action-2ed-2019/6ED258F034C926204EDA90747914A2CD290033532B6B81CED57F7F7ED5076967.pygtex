@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Duration2}\PYG{o}{\PYGZgt{}}
+\PYG{n}{time\PYGZus{}point}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{time\PYGZus{}point}\PYG{o}{\PYGZlt{}}\PYG{n}{clock}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Duration2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{);}
+\end{Verbatim}

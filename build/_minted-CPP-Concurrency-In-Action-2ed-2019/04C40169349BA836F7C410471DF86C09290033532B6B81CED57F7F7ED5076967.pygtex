@@ -1,0 +1,57 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{hierarchical\PYGZus{}mutex}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{internal\PYGZus{}mutex}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{hierarchy\PYGZus{}value}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{previous\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{check\PYGZus{}for\PYGZus{}hierarchy\PYGZus{}violation}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{hierarchy\PYGZus{}value}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{logic\PYGZus{}error}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}mutex hierarchy violated\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{update\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{previous\PYGZus{}hierarchy\PYGZus{}value}\PYG{o}{=}\PYG{n}{this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{    }\PYG{n}{this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{o}{=}\PYG{n}{hierarchy\PYGZus{}value}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{)}\PYG{o}{:}
+\PYG{+w}{      }\PYG{n}{hierarchy\PYGZus{}value}\PYG{p}{(}\PYG{n}{value}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{previous\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{check\PYGZus{}for\PYGZus{}hierarchy\PYGZus{}violation}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{internal\PYGZus{}mutex}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{    }\PYG{n}{update\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{unlock}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{o}{!=}\PYG{n}{hierarchy\PYGZus{}value}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{logic\PYGZus{}error}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}mutex hierarchy violated\PYGZdq{}}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 9}
+\PYG{+w}{    }\PYG{n}{this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{o}{=}\PYG{n}{previous\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{    }\PYG{n}{internal\PYGZus{}mutex}\PYG{p}{.}\PYG{n}{unlock}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{try\PYGZus{}lock}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{check\PYGZus{}for\PYGZus{}hierarchy\PYGZus{}violation}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{internal\PYGZus{}mutex}\PYG{p}{.}\PYG{n}{try\PYGZus{}lock}\PYG{p}{())}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{false}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{update\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}
+\PYG{+w}{     }\PYG{n+nf}{hierarchical\PYGZus{}mutex::this\PYGZus{}thread\PYGZus{}hierarchy\PYGZus{}value}\PYG{p}{(}\PYG{n}{ULONG\PYGZus{}MAX}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 8}
+\end{Verbatim}

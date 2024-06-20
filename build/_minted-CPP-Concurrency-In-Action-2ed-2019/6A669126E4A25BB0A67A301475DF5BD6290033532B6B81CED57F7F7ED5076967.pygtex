@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{Key}\PYG{p}{,}\PYG{n}{Value}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{threadsafe\PYGZus{}lookup\PYGZus{}table}\PYG{o}{::}\PYG{n}{get\PYGZus{}map}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{locks}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{buckets}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{locks}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{buckets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{mutex}\PYG{p}{));}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{Key}\PYG{p}{,}\PYG{n}{Value}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{buckets}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{for}\PYG{p}{(}\PYG{n}{bucket\PYGZus{}iterator}\PYG{+w}{ }\PYG{n}{it}\PYG{o}{=}\PYG{n}{buckets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{it}\PYG{o}{!=}\PYG{n}{buckets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{();}
+\PYG{+w}{        }\PYG{o}{++}\PYG{n}{it}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{res}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{o}{*}\PYG{n}{it}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

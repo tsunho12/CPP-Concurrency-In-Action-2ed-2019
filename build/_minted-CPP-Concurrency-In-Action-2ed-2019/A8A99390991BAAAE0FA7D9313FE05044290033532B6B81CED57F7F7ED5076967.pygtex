@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}\PYGZgt{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{bar}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZam{}}\PYG{p}{,}\PYG{k+kt}{double}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{         }\PYG{k+kt}{int}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{args\PYGZus{}1}\PYG{p}{,}
+\PYG{+w}{         }\PYG{k+kt}{double}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{args\PYGZus{}2}\PYG{p}{,}
+\PYG{+w}{         }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{args\PYGZus{}3}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{foo}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZam{}\PYGZgt{}}\PYG{p}{(}\PYG{n}{args\PYGZus{}1}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{args\PYGZus{}2}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{args\PYGZus{}3}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

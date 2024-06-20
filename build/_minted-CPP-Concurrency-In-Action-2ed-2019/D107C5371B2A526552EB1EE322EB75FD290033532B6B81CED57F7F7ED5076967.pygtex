@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{join\PYGZus{}threads}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{threads}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{join\PYGZus{}threads}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{threads\PYGZus{}}\PYG{p}{)}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{threads}\PYG{p}{(}\PYG{n}{threads\PYGZus{}}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{o}{\PYGZti{}}\PYG{n}{join\PYGZus{}threads}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{threads}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{threads}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{joinable}\PYG{p}{())}
+\PYG{+w}{        }\PYG{n}{threads}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

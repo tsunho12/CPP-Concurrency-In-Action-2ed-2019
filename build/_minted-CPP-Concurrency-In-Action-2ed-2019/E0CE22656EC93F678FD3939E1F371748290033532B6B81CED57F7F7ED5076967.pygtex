@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Y}\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{Y}\PYG{p}{()}\PYG{o}{:}\PYG{n}{data}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{get\PYGZus{}value}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{increment}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{    }\PYG{o}{++}\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{ProtectedY}\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{Y}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{m}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{unlock}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{m}\PYG{p}{.}\PYG{n}{unlock}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{Y}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{get\PYGZus{}vec}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{increment\PYGZus{}all}\PYG{p}{(}\PYG{n}{ProtectedY}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{+w}{ }\PYG{n}{guard}\PYG{p}{(}\PYG{n}{data}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{auto}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{v}\PYG{o}{=}\PYG{n}{data}\PYG{p}{.}\PYG{n}{get\PYGZus{}vec}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{for\PYGZus{}each}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{execution}\PYG{o}{::}\PYG{n}{par\PYGZus{}unseq}\PYG{p}{,}\PYG{n}{v}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{v}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{    }\PYG{p}{[](}\PYG{n}{Y}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{y}\PYG{p}{.}\PYG{n}{increment}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{});}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

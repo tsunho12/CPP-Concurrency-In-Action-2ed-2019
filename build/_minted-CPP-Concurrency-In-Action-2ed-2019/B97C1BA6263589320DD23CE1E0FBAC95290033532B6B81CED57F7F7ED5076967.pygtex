@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{process\PYGZus{}big\PYGZus{}object}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{big\PYGZus{}object}\PYG{o}{\PYGZgt{}}\PYG{p}{);}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{big\PYGZus{}object}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{big\PYGZus{}object}\PYG{p}{);}
+\PYG{n}{p}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{prepare\PYGZus{}data}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{);}
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{t}\PYG{p}{(}\PYG{n}{process\PYGZus{}big\PYGZus{}object}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{p}\PYG{p}{));}
+\end{Verbatim}

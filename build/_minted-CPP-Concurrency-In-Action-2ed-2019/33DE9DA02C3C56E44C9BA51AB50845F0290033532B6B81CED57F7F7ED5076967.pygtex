@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{interruptible\PYGZus{}wait}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{uf}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{this\PYGZus{}thread\PYGZus{}interrupt\PYGZus{}flag}\PYG{p}{.}\PYG{n}{is\PYGZus{}set}\PYG{p}{())}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{uf}\PYG{p}{.}\PYG{n}{wait\PYGZus{}for}\PYG{p}{(}\PYG{n}{lk}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{))}\PYG{o}{==}
+\PYG{+w}{       }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future\PYGZus{}status}\PYG{o}{::}\PYG{n}{ready}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{interruption\PYGZus{}point}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{,}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{a}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{err}{”}\PYG{p}{,}\PYG{err}{”}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{b}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}num}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{foo}\PYG{p}{(}\PYG{n}{get\PYGZus{}num}\PYG{p}{(),}\PYG{n}{get\PYGZus{}num}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 无序调用get\PYGZus{}num()}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

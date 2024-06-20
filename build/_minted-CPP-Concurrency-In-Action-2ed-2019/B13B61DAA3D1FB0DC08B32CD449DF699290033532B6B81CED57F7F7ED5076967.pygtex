@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{lock\PYGZus{}free\PYGZus{}stack}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{pop}\PYG{p}{(}\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{node}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{old\PYGZus{}head}\PYG{o}{=}\PYG{n}{head}\PYG{p}{.}\PYG{n}{load}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{head}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}weak}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{p}{,}\PYG{n}{old\PYGZus{}head}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{));}
+\PYG{+w}{    }\PYG{n}{result}\PYG{o}{=}\PYG{n}{old\PYGZus{}head}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

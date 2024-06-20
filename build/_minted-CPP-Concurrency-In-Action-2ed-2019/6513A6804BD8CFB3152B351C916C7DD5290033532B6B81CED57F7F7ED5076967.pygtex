@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{f}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{n}{square\PYGZus{}root}\PYG{p}{,}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{);}
+\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{y}\PYG{o}{=}\PYG{n}{f}\PYG{p}{.}\PYG{n}{get}\PYG{p}{();}
+\end{Verbatim}

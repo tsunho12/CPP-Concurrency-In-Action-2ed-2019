@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{my\PYGZus{}data}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{data\PYGZus{}item1}\PYG{+w}{ }\PYG{n}{d1}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{data\PYGZus{}item2}\PYG{+w}{ }\PYG{n}{d2}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{padding}\PYG{p}{[}\PYG{l+m+mi}{65536}\PYG{p}{];}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{my\PYGZus{}data}\PYG{+w}{ }\PYG{n}{some\PYGZus{}array}\PYG{p}{[}\PYG{l+m+mi}{256}\PYG{p}{];}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{for\PYGZus{}each}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{execution}\PYG{o}{::}\PYG{n}{par}\PYG{p}{,}\PYG{n}{v}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{v}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}\PYG{n}{do\PYGZus{}stuff}\PYG{p}{);}
+\end{Verbatim}

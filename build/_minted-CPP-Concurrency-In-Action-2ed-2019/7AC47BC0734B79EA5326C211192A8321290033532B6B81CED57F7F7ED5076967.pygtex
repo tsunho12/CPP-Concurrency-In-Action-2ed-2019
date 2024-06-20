@@ -1,0 +1,64 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}exception\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}memory\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}mutex\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}stack\PYGZgt{}}
+
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{empty\PYGZus{}stack}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{exception}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{o}{*}\PYG{+w}{ }\PYG{n+nf}{what}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{throw}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n}{Ireturn}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}empty stack!\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{};}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{threadsafe\PYGZus{}stack}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{stack}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{mutable}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}stack}\PYG{p}{()}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n}{I}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{stack}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{())\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}stack}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{threadsafe\PYGZus{}stack}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{other}\PYG{p}{.}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{data}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{.}\PYG{n}{data}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 1 在构造函数体中的执行拷贝}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}stack}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{threadsafe\PYGZus{}stack}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{delete}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{push}\PYG{p}{(}\PYG{n}{T}\PYG{+w}{ }\PYG{n}{new\PYGZus{}value}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{data}\PYG{p}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n}{new\PYGZus{}value}\PYG{p}{);}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pop}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}\PYG{+w}{ }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{empty\PYGZus{}stack}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 在调用pop前，检查栈是否为空}
+
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{data}\PYG{p}{.}\PYG{n}{top}\PYG{p}{()));}\PYG{+w}{ }\PYG{c+c1}{// 在修改堆栈前，分配出返回值}
+\PYG{+w}{    }\PYG{n}{data}\PYG{p}{.}\PYG{n}{pop}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{pop}\PYG{p}{(}\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}\PYG{+w}{ }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{empty\PYGZus{}stack}\PYG{p}{();}
+
+\PYG{+w}{    }\PYG{n}{value}\PYG{o}{=}\PYG{n}{data}\PYG{p}{.}\PYG{n}{top}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{data}\PYG{p}{.}\PYG{n}{pop}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{empty}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

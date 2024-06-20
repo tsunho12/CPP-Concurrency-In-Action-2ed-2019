@@ -1,0 +1,57 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{thread\PYGZus{}pool}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kt}{atomic\PYGZus{}bool}\PYG{+w}{ }\PYG{n}{done}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{thread\PYGZus{}safe\PYGZus{}queue}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{function}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{work\PYGZus{}queue}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{threads}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{n}{join\PYGZus{}threads}\PYG{+w}{ }\PYG{n}{joiner}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 3}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{worker\PYGZus{}thread}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{done}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{function}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{task}\PYG{p}{;}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{work\PYGZus{}queue}\PYG{p}{.}\PYG{n}{try\PYGZus{}pop}\PYG{p}{(}\PYG{n}{task}\PYG{p}{))}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{task}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{k}{else}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{this\PYGZus{}thread}\PYG{o}{::}\PYG{n}{yield}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{thread\PYGZus{}pool}\PYG{p}{()}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{done}\PYG{p}{(}\PYG{n+nb}{false}\PYG{p}{),}\PYG{n}{joiner}\PYG{p}{(}\PYG{n}{threads}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{thread\PYGZus{}count}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{hardware\PYGZus{}concurrency}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 8}
+
+\PYG{+w}{    }\PYG{k}{try}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{thread\PYGZus{}count}\PYG{p}{;}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{threads}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}
+\PYG{+w}{          }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{thread\PYGZus{}pool}\PYG{o}{::}\PYG{n}{worker\PYGZus{}thread}\PYG{p}{,}\PYG{k}{this}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 9}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{catch}\PYG{p}{(...)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{done}\PYG{o}{=}\PYG{n+nb}{true}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 10}
+\PYG{+w}{      }\PYG{k}{throw}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{o}{\PYGZti{}}\PYG{n}{thread\PYGZus{}pool}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{done}\PYG{o}{=}\PYG{n+nb}{true}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 11}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{FunctionType}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{submit}\PYG{p}{(}\PYG{n}{FunctionType}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{work\PYGZus{}queue}\PYG{p}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{function}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{f}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 12}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

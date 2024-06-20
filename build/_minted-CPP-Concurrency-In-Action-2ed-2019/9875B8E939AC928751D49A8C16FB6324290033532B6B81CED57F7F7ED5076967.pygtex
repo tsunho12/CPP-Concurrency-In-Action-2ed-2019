@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{find\PYGZus{}the\PYGZus{}answer}\PYG{p}{;}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{fut}\PYG{o}{=}\PYG{n}{find\PYGZus{}the\PYGZus{}answer}\PYG{p}{();}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{fut2}\PYG{o}{=}\PYG{n}{fut}\PYG{p}{.}\PYG{n}{then}\PYG{p}{(}\PYG{n}{find\PYGZus{}the\PYGZus{}question}\PYG{p}{);}
+\PYG{n}{assert}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fut}\PYG{p}{.}\PYG{n}{valid}\PYG{p}{());}
+\PYG{n}{assert}\PYG{p}{(}\PYG{n}{fut2}\PYG{p}{.}\PYG{n}{valid}\PYG{p}{());}
+\end{Verbatim}

@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{T}\PYG{+w}{ }\PYG{n}{sum}\PYG{p}{(}\PYG{n}{T}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{,}\PYG{n}{T}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{a}\PYG{o}{+}\PYG{n}{b}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{n}{sum}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{42}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// ok，sum\PYGZlt{}int\PYGZgt{}是constexpr}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{s}\PYG{o}{=}
+\PYG{+w}{  }\PYG{n}{sum}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}hello\PYGZdq{}}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{(}\PYG{l+s}{\PYGZdq{} world\PYGZdq{}}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 也行，不过sum\PYGZlt{}std::string\PYGZgt{}就不是constexpr了}
+\end{Verbatim}

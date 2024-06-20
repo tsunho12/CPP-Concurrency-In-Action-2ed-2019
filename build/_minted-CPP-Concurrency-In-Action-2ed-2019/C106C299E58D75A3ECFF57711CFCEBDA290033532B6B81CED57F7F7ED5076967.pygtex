@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{thread\PYGZus{}count}\PYG{o}{=}\PYG{p}{...;}
+\PYG{+w}{  }\PYG{n}{latch}\PYG{+w}{ }\PYG{n}{done}\PYG{p}{(}\PYG{n}{thread\PYGZus{}count}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{my\PYGZus{}data}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{[}\PYG{n}{thread\PYGZus{}count}\PYG{p}{];}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{threads}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{thread\PYGZus{}count}\PYG{p}{;}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{threads}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{launch}\PYG{o}{::}\PYG{n}{async}\PYG{p}{,[}\PYG{o}{\PYGZam{}}\PYG{p}{,}\PYG{n}{i}\PYG{p}{]\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 2}
+\PYG{+w}{      }\PYG{n}{data}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{make\PYGZus{}data}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+\PYG{+w}{      }\PYG{n}{done}\PYG{p}{.}\PYG{n}{count\PYGZus{}down}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 3}
+\PYG{+w}{      }\PYG{n}{do\PYGZus{}more\PYGZus{}stuff}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 4}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{  }\PYG{n}{done}\PYG{p}{.}\PYG{n}{wait}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 5}
+\PYG{+w}{  }\PYG{n}{process\PYGZus{}data}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,}\PYG{n}{thread\PYGZus{}count}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 6}
+\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{c+c1}{// 7}
+\end{Verbatim}

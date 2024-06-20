@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}and\PYGZus{}process\PYGZus{}data}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{my\PYGZus{}lock}\PYG{p}{(}\PYG{n}{the\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{some\PYGZus{}class}\PYG{+w}{ }\PYG{n}{data\PYGZus{}to\PYGZus{}process}\PYG{o}{=}\PYG{n}{get\PYGZus{}next\PYGZus{}data\PYGZus{}chunk}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{my\PYGZus{}lock}\PYG{p}{.}\PYG{n}{unlock}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 1 不要让锁住的互斥量越过process()函数的调用}
+\PYG{+w}{  }\PYG{n}{result\PYGZus{}type}\PYG{+w}{ }\PYG{n}{result}\PYG{o}{=}\PYG{n}{process}\PYG{p}{(}\PYG{n}{data\PYGZus{}to\PYGZus{}process}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{my\PYGZus{}lock}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 2 为了写入数据，对互斥量再次上锁}
+\PYG{+w}{  }\PYG{n}{write\PYGZus{}result}\PYG{p}{(}\PYG{n}{data\PYGZus{}to\PYGZus{}process}\PYG{p}{,}\PYG{n}{result}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

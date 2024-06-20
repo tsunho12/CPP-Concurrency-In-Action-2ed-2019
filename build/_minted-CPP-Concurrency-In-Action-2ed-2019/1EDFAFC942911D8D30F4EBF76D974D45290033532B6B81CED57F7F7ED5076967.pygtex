@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{data}\PYG{o}{=}\PYG{n}{make\PYGZus{}data}\PYG{p}{();}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{for\PYGZus{}each}\PYG{p}{(}\PYG{n}{data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),[](}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{)\PYGZob{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{i}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;\PYGZcb{});}
+\end{Verbatim}

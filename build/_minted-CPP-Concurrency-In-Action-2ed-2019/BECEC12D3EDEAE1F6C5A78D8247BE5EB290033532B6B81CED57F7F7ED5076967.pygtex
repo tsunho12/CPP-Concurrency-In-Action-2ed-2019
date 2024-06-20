@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{duration}\PYG{p}{(}\PYG{n}{duration\PYGZus{}values}\PYG{o}{\PYGZlt{}}\PYG{n}{rep}\PYG{o}{\PYGZgt{}::}\PYG{n}{min}\PYG{p}{());}
+\end{Verbatim}

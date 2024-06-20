@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Types}\PYG{o}{\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{dummy4}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{n}{Types}\PYG{p}{...}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{dummy4}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{char}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1 ok，为std::pair\PYGZlt{}int, char\PYGZgt{}}
+\PYG{n}{dummy4}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 2 错误，无第二个类型}
+\PYG{n}{dummy4}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{c}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 3 错误，类型太多}
+\end{Verbatim}

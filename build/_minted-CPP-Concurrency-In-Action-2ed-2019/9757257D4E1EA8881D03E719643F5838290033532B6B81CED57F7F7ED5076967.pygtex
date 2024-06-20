@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{foo}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// foo\PYGZlt{}int\PYGZgt{}(42)}
+\PYG{n}{foo}\PYG{p}{(}\PYG{l+m+mf}{3.14159}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// foo\PYGZlt{}double\PYGZgt{}\PYGZlt{}3.14159\PYGZgt{}}
+\PYG{n}{foo}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// foo\PYGZlt{}std::string\PYGZgt{}(std::string())}
+\end{Verbatim}

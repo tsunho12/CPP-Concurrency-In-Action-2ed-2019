@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{static}\PYG{+w}{ }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{time\PYGZus{}point}\PYG{+w}{ }\PYG{n+nf}{max}\PYG{p}{();}
+\end{Verbatim}

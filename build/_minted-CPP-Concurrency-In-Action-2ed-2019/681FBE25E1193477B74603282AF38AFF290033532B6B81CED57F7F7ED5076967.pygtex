@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{y}\PYG{o}{=}\PYG{n}{square\PYGZus{}root}\PYG{p}{(}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{);}
+\end{Verbatim}

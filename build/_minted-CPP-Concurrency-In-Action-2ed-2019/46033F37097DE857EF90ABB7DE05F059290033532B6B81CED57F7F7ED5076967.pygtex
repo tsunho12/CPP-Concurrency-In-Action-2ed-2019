@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{get\PYGZus{}lock}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{extern}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{some\PYGZus{}mutex}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{some\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{prepare\PYGZus{}data}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{process\PYGZus{}data}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{get\PYGZus{}lock}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{n}{do\PYGZus{}something}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{+w}{ }\PYG{n+nf}{high\PYGZus{}level\PYGZus{}mutex}\PYG{p}{(}\PYG{l+m+mi}{10000}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{+w}{ }\PYG{n+nf}{low\PYGZus{}level\PYGZus{}mutex}\PYG{p}{(}\PYG{l+m+mi}{5000}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{+w}{ }\PYG{n+nf}{other\PYGZus{}mutex}\PYG{p}{(}\PYG{l+m+mi}{6000}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 3}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{do\PYGZus{}low\PYGZus{}level\PYGZus{}stuff}\PYG{p}{();}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{low\PYGZus{}level\PYGZus{}func}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{low\PYGZus{}level\PYGZus{}mutex}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{do\PYGZus{}low\PYGZus{}level\PYGZus{}stuff}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{high\PYGZus{}level\PYGZus{}stuff}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{some\PYGZus{}param}\PYG{p}{);}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{high\PYGZus{}level\PYGZus{}func}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{high\PYGZus{}level\PYGZus{}mutex}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 6}
+\PYG{+w}{  }\PYG{n}{high\PYGZus{}level\PYGZus{}stuff}\PYG{p}{(}\PYG{n}{low\PYGZus{}level\PYGZus{}func}\PYG{p}{());}\PYG{+w}{ }\PYG{c+c1}{// 5}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{thread\PYGZus{}a}\PYG{p}{()}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{high\PYGZus{}level\PYGZus{}func}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{do\PYGZus{}other\PYGZus{}stuff}\PYG{p}{();}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{other\PYGZus{}stuff}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{high\PYGZus{}level\PYGZus{}func}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 10}
+\PYG{+w}{  }\PYG{n}{do\PYGZus{}other\PYGZus{}stuff}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{thread\PYGZus{}b}\PYG{p}{()}\PYG{+w}{ }\PYG{c+c1}{// 8}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{hierarchical\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{other\PYGZus{}mutex}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 9}
+\PYG{+w}{  }\PYG{n}{other\PYGZus{}stuff}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

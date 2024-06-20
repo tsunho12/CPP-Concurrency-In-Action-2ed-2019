@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{t}\PYG{p}{(}\PYG{n}{do\PYGZus{}background\PYGZus{}work}\PYG{p}{);}
+\PYG{n}{t}\PYG{p}{.}\PYG{n}{detach}\PYG{p}{();}
+\PYG{n}{assert}\PYG{p}{(}\PYG{o}{!}\PYG{n}{t}\PYG{p}{.}\PYG{n}{joinable}\PYG{p}{());}
+\end{Verbatim}

@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{id}\PYG{+w}{ }\PYG{n}{master\PYGZus{}thread}\PYG{p}{;}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{some\PYGZus{}core\PYGZus{}part\PYGZus{}of\PYGZus{}algorithm}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{this\PYGZus{}thread}\PYG{o}{::}\PYG{n}{get\PYGZus{}id}\PYG{p}{()}\PYG{o}{==}\PYG{n}{master\PYGZus{}thread}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{do\PYGZus{}master\PYGZus{}thread\PYGZus{}work}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{do\PYGZus{}common\PYGZus{}work}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

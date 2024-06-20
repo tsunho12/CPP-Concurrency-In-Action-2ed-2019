@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{condition\PYGZus{}variable}\PYG{+w}{ }\PYG{n}{cond}\PYG{p}{;}
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{data\PYGZus{}ready}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{wait\PYGZus{}for\PYGZus{}data}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{cond}\PYG{p}{.}\PYG{n}{wait}\PYG{p}{(}\PYG{n}{lk}\PYG{p}{,[]\PYGZob{}}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{data\PYGZus{}ready}\PYG{p}{;\PYGZcb{});}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

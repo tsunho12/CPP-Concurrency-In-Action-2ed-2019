@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{extern}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{some\PYGZus{}promise}\PYG{p}{;}
+\PYG{k}{try}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{some\PYGZus{}promise}\PYG{p}{.}\PYG{n}{set\PYGZus{}value}\PYG{p}{(}\PYG{n}{calculate\PYGZus{}value}\PYG{p}{());}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{catch}\PYG{p}{(...)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{some\PYGZus{}promise}\PYG{p}{.}\PYG{n}{set\PYGZus{}exception}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{current\PYGZus{}exception}\PYG{p}{());}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

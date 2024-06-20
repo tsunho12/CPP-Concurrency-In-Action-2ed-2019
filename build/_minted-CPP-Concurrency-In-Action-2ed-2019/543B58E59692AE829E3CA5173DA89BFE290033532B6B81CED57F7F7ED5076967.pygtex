@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{internal\PYGZus{}thread}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{p}{([}\PYG{n}{f}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{p}\PYG{p}{]\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{p}\PYG{p}{.}\PYG{n}{set\PYGZus{}value}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{this\PYGZus{}thread\PYGZus{}interrupt\PYGZus{}flag}\PYG{p}{);}
+
+\PYG{+w}{        }\PYG{k}{try}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{          }\PYG{n}{f}\PYG{p}{();}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{catch}\PYG{p}{(}\PYG{n}{thread\PYGZus{}interrupted}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{});}
+\end{Verbatim}

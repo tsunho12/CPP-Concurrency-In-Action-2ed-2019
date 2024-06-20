@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Container}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{deque}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{stack}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{stack}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Container}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{stack}\PYG{p}{(}\PYG{n}{Container}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Container}\PYG{p}{());}
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Alloc}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{stack}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Alloc}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Alloc}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{stack}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Container}\PYG{o}{\PYGZam{}}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Alloc}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Alloc}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{stack}\PYG{p}{(}\PYG{n}{Container}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Alloc}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Alloc}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{stack}\PYG{p}{(}\PYG{n}{stack}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Alloc}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{empty}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{n+nf}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n+nf}{top}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{T}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{top}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{push}\PYG{p}{(}\PYG{n}{T}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{push}\PYG{p}{(}\PYG{n}{T}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{pop}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{swap}\PYG{p}{(}\PYG{n}{stack}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Args}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{emplace}\PYG{p}{(}\PYG{n}{Args}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{...}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// C++14的新特性}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

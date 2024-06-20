@@ -1,0 +1,47 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}unordered\PYGZus{}map\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}numeric\PYGZgt{}}
+
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{log\PYGZus{}info}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{page}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{time\PYGZus{}t}\PYG{+w}{ }\PYG{n}{visit\PYGZus{}time}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{browser}\PYG{p}{;}
+\PYG{+w}{  }\PYG{c+c1}{// any other fields}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{extern}\PYG{+w}{ }\PYG{n}{log\PYGZus{}info}\PYG{+w}{ }\PYG{n+nf}{parse\PYGZus{}log\PYGZus{}line}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{line}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unordered\PYGZus{}map}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+\PYG{n}{visit\PYGZus{}map\PYGZus{}type}
+\PYG{n+nf}{count\PYGZus{}visits\PYGZus{}per\PYGZus{}page}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{log\PYGZus{}lines}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{combine\PYGZus{}visits}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}
+\PYG{+w}{    }\PYG{k}{operator}\PYG{p}{()(}\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 3}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{lhs}\PYG{p}{.}\PYG{n}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{.}\PYG{n}{size}\PYG{p}{())}
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{swap}\PYG{p}{(}\PYG{n}{lhs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{for}\PYG{p}{(}\PYG{k}{auto}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{entry}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{rhs}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{lhs}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{.}\PYG{n}{first}\PYG{p}{]}\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{entry}\PYG{p}{.}\PYG{n}{second}\PYG{p}{;}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{lhs}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{k}{operator}\PYG{p}{()(}\PYG{n}{log\PYGZus{}info}\PYG{+w}{ }\PYG{n}{log}\PYG{p}{,}\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 4}
+\PYG{+w}{      }\PYG{o}{++}\PYG{n}{map}\PYG{p}{[}\PYG{n}{log}\PYG{p}{.}\PYG{n}{page}\PYG{p}{];}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{k}{operator}\PYG{p}{()(}\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{,}\PYG{n}{log\PYGZus{}info}\PYG{+w}{ }\PYG{n}{log}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 5}
+\PYG{+w}{      }\PYG{o}{++}\PYG{n}{map}\PYG{p}{[}\PYG{n}{log}\PYG{p}{.}\PYG{n}{page}\PYG{p}{];}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{k}{operator}\PYG{p}{()(}\PYG{n}{log\PYGZus{}info}\PYG{+w}{ }\PYG{n}{log1}\PYG{p}{,}\PYG{n}{log\PYGZus{}info}\PYG{+w}{ }\PYG{n}{log2}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 6}
+\PYG{+w}{      }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{;}
+\PYG{+w}{      }\PYG{o}{++}\PYG{n}{map}\PYG{p}{[}\PYG{n}{log1}\PYG{p}{.}\PYG{n}{page}\PYG{p}{];}
+\PYG{+w}{      }\PYG{o}{++}\PYG{n}{map}\PYG{p}{[}\PYG{n}{log2}\PYG{p}{.}\PYG{n}{page}\PYG{p}{];}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{};}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{transform\PYGZus{}reduce}\PYG{p}{(}\PYG{+w}{ }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{execution}\PYG{o}{::}\PYG{n}{par}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{log\PYGZus{}lines}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{log\PYGZus{}lines}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{    }\PYG{n}{visit\PYGZus{}map\PYGZus{}type}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{combine\PYGZus{}visits}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{parse\PYGZus{}log\PYGZus{}line}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

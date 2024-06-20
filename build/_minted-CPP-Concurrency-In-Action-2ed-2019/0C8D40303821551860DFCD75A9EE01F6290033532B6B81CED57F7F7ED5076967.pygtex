@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{max\PYGZus{}hazard\PYGZus{}pointers}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{;}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{hazard\PYGZus{}pointer}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{id}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{id}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{*\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pointer}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{hazard\PYGZus{}pointer}\PYG{+w}{ }\PYG{n}{hazard\PYGZus{}pointers}\PYG{p}{[}\PYG{n}{max\PYGZus{}hazard\PYGZus{}pointers}\PYG{p}{];}
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{hp\PYGZus{}owner}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{hazard\PYGZus{}pointer}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{hp}\PYG{p}{;}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{hp\PYGZus{}owner}\PYG{p}{(}\PYG{n}{hp\PYGZus{}owner}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{o}{=}\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{hp\PYGZus{}owner}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{n}{hp\PYGZus{}owner}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{o}{=}\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{hp\PYGZus{}owner}\PYG{p}{()}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{hp}\PYG{p}{(}\PYG{k}{nullptr}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{max\PYGZus{}hazard\PYGZus{}pointers}\PYG{p}{;}\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{id}\PYG{+w}{ }\PYG{n}{old\PYGZus{}id}\PYG{p}{;}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{hazard\PYGZus{}pointers}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{id}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}strong}\PYG{p}{(}\PYG{+w}{  }\PYG{c+c1}{// 6 尝试声明风险指针的所有权}
+\PYG{+w}{         }\PYG{n}{old\PYGZus{}id}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{this\PYGZus{}thread}\PYG{o}{::}\PYG{n}{get\PYGZus{}id}\PYG{p}{()))}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{hp}\PYG{o}{=\PYGZam{}}\PYG{n}{hazard\PYGZus{}pointers}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}
+\PYG{+w}{        }\PYG{k}{break}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{hp}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{runtime\PYGZus{}error}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}No hazard pointers available\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{*\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{get\PYGZus{}pointer}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{hp}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{pointer}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{o}{\PYGZti{}}\PYG{n}{hp\PYGZus{}owner}\PYG{p}{()}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{hp}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{pointer}\PYG{p}{.}\PYG{n}{store}\PYG{p}{(}\PYG{k}{nullptr}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 8}
+\PYG{+w}{    }\PYG{n}{hp}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{id}\PYG{p}{.}\PYG{n}{store}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{id}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 9}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{*\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{get\PYGZus{}hazard\PYGZus{}pointer\PYGZus{}for\PYGZus{}current\PYGZus{}thread}\PYG{p}{()}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{hp\PYGZus{}owner}\PYG{+w}{ }\PYG{n}{hazard}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 4 每个线程都有自己的风险指针}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{hazard}\PYG{p}{.}\PYG{n}{get\PYGZus{}pointer}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

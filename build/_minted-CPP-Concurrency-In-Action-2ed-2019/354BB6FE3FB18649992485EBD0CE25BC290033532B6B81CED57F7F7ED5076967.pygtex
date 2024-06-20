@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}future}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sf}\PYG{p}{(}\PYG{n}{p}\PYG{p}{.}\PYG{n}{get\PYGZus{}future}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 1 隐式转移所有权}
+\end{Verbatim}

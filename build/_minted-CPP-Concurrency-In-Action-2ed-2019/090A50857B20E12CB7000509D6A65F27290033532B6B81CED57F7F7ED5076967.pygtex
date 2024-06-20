@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{some\PYGZus{}function}\PYG{p}{();}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{some\PYGZus{}other\PYGZus{}function}\PYG{p}{();}
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{t1}\PYG{p}{(}\PYG{n}{some\PYGZus{}function}\PYG{p}{);}\PYG{+w}{            }\PYG{c+c1}{// 1}
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t2}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{t1}\PYG{p}{);}\PYG{+w}{            }\PYG{c+c1}{// 2}
+\PYG{n}{t1}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{p}{(}\PYG{n}{some\PYGZus{}other\PYGZus{}function}\PYG{p}{);}\PYG{+w}{    }\PYG{c+c1}{// 3}
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t3}\PYG{p}{;}\PYG{+w}{                            }\PYG{c+c1}{// 4}
+\PYG{n}{t3}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{t2}\PYG{p}{);}\PYG{+w}{                        }\PYG{c+c1}{// 5}
+\PYG{n}{t1}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{t3}\PYG{p}{);}\PYG{+w}{                        }\PYG{c+c1}{// 6 赋值操作将使程序崩溃}
+\end{Verbatim}

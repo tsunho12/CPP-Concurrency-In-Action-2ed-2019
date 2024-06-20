@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{return}\PYG{+w}{ }\PYG{n}{backend}\PYG{p}{.}\PYG{n}{async\PYGZus{}authenticate\PYGZus{}user}\PYG{p}{(}\PYG{n}{username}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{password}\PYG{p}{).}\PYG{n}{then}\PYG{p}{(}
+\PYG{+w}{    }\PYG{p}{[](}\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{id}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{backend}\PYG{p}{.}\PYG{n}{async\PYGZus{}request\PYGZus{}current\PYGZus{}info}\PYG{p}{(}\PYG{n}{id}\PYG{p}{.}\PYG{n}{get}\PYG{p}{());}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{});}
+\end{Verbatim}

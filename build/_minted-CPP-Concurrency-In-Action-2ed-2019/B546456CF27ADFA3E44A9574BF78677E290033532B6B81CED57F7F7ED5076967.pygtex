@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{42}\PYG{p}{;}
+\PYG{n}{foo}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// foo\PYGZlt{}int\PYGZam{}\PYGZgt{}(i)}
+\end{Verbatim}

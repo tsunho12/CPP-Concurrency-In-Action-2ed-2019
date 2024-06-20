@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{ToDuration}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Rep}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Period}\PYG{o}{\PYGZgt{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{ToDuration}\PYG{+w}{ }\PYG{n}{duration\PYGZus{}cast}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZlt{}}\PYG{n}{Rep}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Period}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+\end{Verbatim}

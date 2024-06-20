@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{(}\PYG{n+nb}{true}\PYG{p}{);}
+\PYG{n}{b}\PYG{o}{=}\PYG{n+nb}{false}\PYG{p}{;}
+\end{Verbatim}

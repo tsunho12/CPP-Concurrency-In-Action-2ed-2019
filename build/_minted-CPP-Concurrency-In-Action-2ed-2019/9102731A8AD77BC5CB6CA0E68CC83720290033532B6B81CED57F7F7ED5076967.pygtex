@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{move\PYGZus{}only}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{my\PYGZus{}class}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{data}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{other}\PYG{p}{.}\PYG{n}{data}\PYG{p}{))}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{data}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{other}\PYG{p}{.}\PYG{n}{data}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{move\PYGZus{}only}\PYG{+w}{ }\PYG{n}{m1}\PYG{p}{;}
+\PYG{n}{move\PYGZus{}only}\PYG{+w}{ }\PYG{n+nf}{m2}\PYG{p}{(}\PYG{n}{m1}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 错误，拷贝构造声明为“已删除”}
+\PYG{n}{move\PYGZus{}only}\PYG{+w}{ }\PYG{n+nf}{m3}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{m1}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// OK，找到移动构造函数}
+\end{Verbatim}

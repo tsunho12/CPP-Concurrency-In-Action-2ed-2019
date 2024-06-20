@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{X}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{the\PYGZus{}answer}\PYG{o}{=}\PYG{n}{forty\PYGZus{}two}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

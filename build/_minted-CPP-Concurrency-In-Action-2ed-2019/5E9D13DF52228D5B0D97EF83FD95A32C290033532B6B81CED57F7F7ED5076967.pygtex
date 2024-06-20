@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Iterator}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Func}\PYG{o}{\PYGZgt{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{parallel\PYGZus{}for\PYGZus{}each}\PYG{p}{(}\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{first}\PYG{p}{,}\PYG{n}{Iterator}\PYG{+w}{ }\PYG{n}{last}\PYG{p}{,}\PYG{n}{Func}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{length}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{distance}\PYG{p}{(}\PYG{n}{first}\PYG{p}{,}\PYG{n}{last}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{length}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{return}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{min\PYGZus{}per\PYGZus{}thread}\PYG{o}{=}\PYG{l+m+mi}{25}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{length}\PYG{o}{\PYGZlt{}}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{min\PYGZus{}per\PYGZus{}thread}\PYG{p}{))}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{for\PYGZus{}each}\PYG{p}{(}\PYG{n}{first}\PYG{p}{,}\PYG{n}{last}\PYG{p}{,}\PYG{n}{f}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{else}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{Iterator}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{mid\PYGZus{}point}\PYG{o}{=}\PYG{n}{first}\PYG{o}{+}\PYG{n}{length}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{first\PYGZus{}half}\PYG{o}{=}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{parallel\PYGZus{}for\PYGZus{}each}\PYG{o}{\PYGZlt{}}\PYG{n}{Iterator}\PYG{p}{,}\PYG{n}{Func}\PYG{o}{\PYGZgt{}}\PYG{p}{,}
+\PYG{+w}{                 }\PYG{n}{first}\PYG{p}{,}\PYG{n}{mid\PYGZus{}point}\PYG{p}{,}\PYG{n}{f}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{parallel\PYGZus{}for\PYGZus{}each}\PYG{p}{(}\PYG{n}{mid\PYGZus{}point}\PYG{p}{,}\PYG{n}{last}\PYG{p}{,}\PYG{n}{f}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{    }\PYG{n}{first\PYGZus{}half}\PYG{p}{.}\PYG{n}{get}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

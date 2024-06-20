@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Predicate}\PYG{o}{\PYGZgt{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{minimal\PYGZus{}wait}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Predicate}\PYG{+w}{ }\PYG{n}{pred}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{pred}\PYG{p}{())\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{lk}\PYG{p}{.}\PYG{n}{unlock}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{lk}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

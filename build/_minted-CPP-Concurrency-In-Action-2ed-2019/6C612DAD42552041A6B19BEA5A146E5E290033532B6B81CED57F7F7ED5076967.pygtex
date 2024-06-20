@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{for\PYGZus{}each}\PYG{p}{(}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{execution}\PYG{o}{::}\PYG{n}{seq}\PYG{p}{,}\PYG{n}{v}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{v}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{  }\PYG{p}{[](}\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)\PYGZob{}}\PYG{+w}{ }\PYG{k}{throw}\PYG{+w}{ }\PYG{n}{my\PYGZus{}exception}\PYG{p}{();}\PYG{+w}{ }\PYG{p}{\PYGZcb{});}
+\end{Verbatim}

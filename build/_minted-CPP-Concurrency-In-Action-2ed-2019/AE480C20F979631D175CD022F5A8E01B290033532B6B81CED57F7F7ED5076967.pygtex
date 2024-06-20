@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{work\PYGZus{}stealing\PYGZus{}queue}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{function\PYGZus{}wrapper}\PYG{+w}{ }\PYG{n}{data\PYGZus{}type}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{deque}\PYG{o}{\PYGZlt{}}\PYG{n}{data\PYGZus{}type}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{the\PYGZus{}queue}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{k}{mutable}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{the\PYGZus{}mutex}\PYG{p}{;}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{work\PYGZus{}stealing\PYGZus{}queue}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{work\PYGZus{}stealing\PYGZus{}queue}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{work\PYGZus{}stealing\PYGZus{}queue}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{o}{=}\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{work\PYGZus{}stealing\PYGZus{}queue}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{work\PYGZus{}stealing\PYGZus{}queue}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{o}{=}\PYG{k}{delete}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{push}\PYG{p}{(}\PYG{n}{data\PYGZus{}type}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{the\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{push\PYGZus{}front}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{data}\PYG{p}{));}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{empty}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{the\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{try\PYGZus{}pop}\PYG{p}{(}\PYG{n}{data\PYGZus{}type}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{the\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{false}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{res}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{front}\PYG{p}{());}
+\PYG{+w}{    }\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{pop\PYGZus{}front}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{try\PYGZus{}steal}\PYG{p}{(}\PYG{n}{data\PYGZus{}type}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{(}\PYG{n}{the\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{false}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{res}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{back}\PYG{p}{());}
+\PYG{+w}{    }\PYG{n}{the\PYGZus{}queue}\PYG{p}{.}\PYG{n}{pop\PYGZus{}back}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

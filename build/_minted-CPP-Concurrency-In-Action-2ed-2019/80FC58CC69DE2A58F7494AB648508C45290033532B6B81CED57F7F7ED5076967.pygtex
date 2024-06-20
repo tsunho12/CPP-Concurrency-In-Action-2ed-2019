@@ -1,0 +1,56 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{sorter}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{thread\PYGZus{}pool}\PYG{+w}{ }\PYG{n}{pool}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 2}
+
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{do\PYGZus{}sort}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}data}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}data}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{result}\PYG{p}{.}\PYG{n}{splice}\PYG{p}{(}\PYG{n}{result}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{,}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{());}
+\PYG{+w}{    }\PYG{n}{T}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{partition\PYGZus{}val}\PYG{o}{=*}\PYG{n}{result}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{();}
+
+\PYG{+w}{    }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}::}\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{divide\PYGZus{}point}\PYG{o}{=}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{partition}\PYG{p}{(}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{                     }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{T}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{val}\PYG{p}{)\PYGZob{}}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{val}\PYG{o}{\PYGZlt{}}\PYG{n}{partition\PYGZus{}val}\PYG{p}{;\PYGZcb{});}
+
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{new\PYGZus{}lower\PYGZus{}chunk}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{new\PYGZus{}lower\PYGZus{}chunk}\PYG{p}{.}\PYG{n}{splice}\PYG{p}{(}\PYG{n}{new\PYGZus{}lower\PYGZus{}chunk}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{                           }\PYG{n}{chunk\PYGZus{}data}\PYG{p}{,}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}
+\PYG{+w}{                           }\PYG{n}{divide\PYGZus{}point}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{new\PYGZus{}lower}\PYG{o}{=}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{      }\PYG{n}{pool}\PYG{p}{.}\PYG{n}{submit}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{bind}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{sorter}\PYG{o}{::}\PYG{n}{do\PYGZus{}sort}\PYG{p}{,}\PYG{k}{this}\PYG{p}{,}
+\PYG{+w}{                            }\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{new\PYGZus{}lower\PYGZus{}chunk}\PYG{p}{)));}
+
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{new\PYGZus{}higher}\PYG{p}{(}\PYG{n}{do\PYGZus{}sort}\PYG{p}{(}\PYG{n}{chunk\PYGZus{}data}\PYG{p}{));}
+
+\PYG{+w}{    }\PYG{n}{result}\PYG{p}{.}\PYG{n}{splice}\PYG{p}{(}\PYG{n}{result}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}\PYG{n}{new\PYGZus{}higher}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{new\PYGZus{}lower}\PYG{p}{.}\PYG{n}{wait\PYGZus{}for}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{seconds}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{))}\PYG{+w}{ }\PYG{o}{==}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future\PYGZus{}status}\PYG{o}{::}\PYG{n}{timeout}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{pool}\PYG{p}{.}\PYG{n}{run\PYGZus{}pending\PYGZus{}task}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{result}\PYG{p}{.}\PYG{n}{splice}\PYG{p}{(}\PYG{n}{result}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{new\PYGZus{}lower}\PYG{p}{.}\PYG{n}{get}\PYG{p}{());}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{parallel\PYGZus{}quick\PYGZus{}sort}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{list}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{input}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{sorter}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{.}\PYG{n}{do\PYGZus{}sort}\PYG{p}{(}\PYG{n}{input}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

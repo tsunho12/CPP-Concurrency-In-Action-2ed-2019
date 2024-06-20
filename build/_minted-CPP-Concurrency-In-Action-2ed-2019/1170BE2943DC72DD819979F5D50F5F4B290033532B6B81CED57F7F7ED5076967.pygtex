@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{ExecutionPolicy}\PYG{p}{,}
+\PYG{+w}{  }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{ForwardIterator1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{ForwardIterator2}\PYG{o}{\PYGZgt{}}
+\PYG{n}{ForwardIterator2}\PYG{+w}{ }\PYG{n}{copy}\PYG{p}{(}
+\PYG{+w}{  }\PYG{n}{ExecutionPolicy}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{policy}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n}{ForwardIterator1}\PYG{+w}{ }\PYG{n}{first}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ForwardIterator1}\PYG{+w}{ }\PYG{n}{last}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n}{ForwardIterator2}\PYG{+w}{ }\PYG{n}{result}\PYG{p}{);}
+\end{Verbatim}

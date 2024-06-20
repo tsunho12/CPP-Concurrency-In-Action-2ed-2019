@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{func}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 定义在代码2.1中}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{f}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{some\PYGZus{}local\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{func}\PYG{+w}{ }\PYG{n}{my\PYGZus{}func}\PYG{p}{(}\PYG{n}{some\PYGZus{}local\PYGZus{}state}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{(}\PYG{n}{my\PYGZus{}func}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{try}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{do\PYGZus{}something\PYGZus{}in\PYGZus{}current\PYGZus{}thread}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{catch}\PYG{p}{(...)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{    }\PYG{k}{throw}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{t}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

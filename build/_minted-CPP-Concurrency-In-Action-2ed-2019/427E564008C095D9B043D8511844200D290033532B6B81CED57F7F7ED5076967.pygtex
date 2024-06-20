@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sync}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{thread\PYGZus{}1}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{c+c1}{// ...}
+\PYG{+w}{  }\PYG{n}{sync}\PYG{p}{.}\PYG{n}{store}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}release}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{thread\PYGZus{}2}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{expected}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{sync}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}strong}\PYG{p}{(}\PYG{n}{expected}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{              }\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}acq\PYGZus{}rel}\PYG{p}{))}
+\PYG{+w}{    }\PYG{n}{expected}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{thread\PYGZus{}3}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{n}{sync}\PYG{p}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}acquire}\PYG{p}{)}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{+w}{  }\PYG{c+c1}{// ...}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

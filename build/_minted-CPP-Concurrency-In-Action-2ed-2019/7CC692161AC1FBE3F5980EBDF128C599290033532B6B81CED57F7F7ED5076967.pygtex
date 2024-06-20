@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}deque\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}mutex\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}future\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}thread\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}utility\PYGZgt{}}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{deque}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{packaged\PYGZus{}task}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{tasks}\PYG{p}{;}
+
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{gui\PYGZus{}shutdown\PYGZus{}message\PYGZus{}received}\PYG{p}{();}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}and\PYGZus{}process\PYGZus{}gui\PYGZus{}message}\PYG{p}{();}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{gui\PYGZus{}thread}\PYG{p}{()}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{gui\PYGZus{}shutdown\PYGZus{}message\PYGZus{}received}\PYG{p}{())}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{get\PYGZus{}and\PYGZus{}process\PYGZus{}gui\PYGZus{}message}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{packaged\PYGZus{}task}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{task}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{if}\PYG{p}{(}\PYG{n}{tasks}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{        }\PYG{k}{continue}\PYG{p}{;}
+\PYG{+w}{      }\PYG{n}{task}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{tasks}\PYG{p}{.}\PYG{n}{front}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{      }\PYG{n}{tasks}\PYG{p}{.}\PYG{n}{pop\PYGZus{}front}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{task}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{gui\PYGZus{}bg\PYGZus{}thread}\PYG{p}{(}\PYG{n}{gui\PYGZus{}thread}\PYG{p}{);}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Func}\PYG{o}{\PYGZgt{}}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{post\PYGZus{}task\PYGZus{}for\PYGZus{}gui\PYGZus{}thread}\PYG{p}{(}\PYG{n}{Func}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{packaged\PYGZus{}task}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{task}\PYG{p}{(}\PYG{n}{f}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{void}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{res}\PYG{o}{=}\PYG{n}{task}\PYG{p}{.}\PYG{n}{get\PYGZus{}future}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 8}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{tasks}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{task}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 9}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 10}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

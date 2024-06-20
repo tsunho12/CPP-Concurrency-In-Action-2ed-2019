@@ -1,0 +1,37 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{X}
+\PYG{p}{\PYGZob{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{n}{X}\PYG{o}{*\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{;}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{create\PYGZus{}x}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{X}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{=}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{X}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{x}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{42}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{x}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{s}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}hello\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{a}\PYG{p}{.}\PYG{n}{store}\PYG{p}{(}\PYG{l+m+mi}{99}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{p}\PYG{p}{.}\PYG{n}{store}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}release}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{use\PYGZus{}x}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{X}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{p}\PYG{p}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}consume}\PYG{p}{)))}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{this\PYGZus{}thread}\PYG{o}{::}\PYG{n}{sleep}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{microseconds}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+\PYG{+w}{  }\PYG{n}{assert}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{i}\PYG{o}{==}\PYG{l+m+mi}{42}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{n}{assert}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{s}\PYG{o}{==}\PYG{l+s}{\PYGZdq{}hello\PYGZdq{}}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{  }\PYG{n}{assert}\PYG{p}{(}\PYG{n}{a}\PYG{p}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{99}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t1}\PYG{p}{(}\PYG{n}{create\PYGZus{}x}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t2}\PYG{p}{(}\PYG{n}{use\PYGZus{}x}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{t1}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{t2}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

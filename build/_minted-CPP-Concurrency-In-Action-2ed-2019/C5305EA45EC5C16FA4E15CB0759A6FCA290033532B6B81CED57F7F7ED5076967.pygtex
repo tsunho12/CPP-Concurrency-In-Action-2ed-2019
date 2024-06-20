@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{threadsafe\PYGZus{}queue}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}::}\PYG{n}{push}\PYG{p}{(}\PYG{n}{T}\PYG{+w}{ }\PYG{n}{new\PYGZus{}value}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{new\PYGZus{}data}\PYG{p}{(}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{new\PYGZus{}value}\PYG{p}{)));}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{node}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{node}\PYG{p}{);}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{tail\PYGZus{}lock}\PYG{p}{(}\PYG{n}{tail\PYGZus{}mutex}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{tail}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{data}\PYG{o}{=}\PYG{n}{new\PYGZus{}data}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{node}\PYG{o}{*}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{new\PYGZus{}tail}\PYG{o}{=}\PYG{n}{p}\PYG{p}{.}\PYG{n}{get}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{tail}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{p}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{tail}\PYG{o}{=}\PYG{n}{new\PYGZus{}tail}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{data\PYGZus{}cond}\PYG{p}{.}\PYG{n}{notify\PYGZus{}one}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

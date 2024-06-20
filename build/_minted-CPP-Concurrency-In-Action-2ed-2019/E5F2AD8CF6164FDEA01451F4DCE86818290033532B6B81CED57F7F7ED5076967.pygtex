@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}memory\PYGZgt{}}\PYG{c+c1}{ // 为了使用std::shared\PYGZus{}ptr}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{threadsafe\PYGZus{}queue}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}queue}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}queue}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{threadsafe\PYGZus{}queue}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{threadsafe\PYGZus{}queue}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}
+\PYG{+w}{      }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{threadsafe\PYGZus{}queue}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{delete}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 不允许简单的赋值}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{push}\PYG{p}{(}\PYG{n}{T}\PYG{+w}{ }\PYG{n}{new\PYGZus{}value}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{try\PYGZus{}pop}\PYG{p}{(}\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{try\PYGZus{}pop}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 2}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{wait\PYGZus{}and\PYGZus{}pop}\PYG{p}{(}\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{wait\PYGZus{}and\PYGZus{}pop}\PYG{p}{();}
+
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{empty}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

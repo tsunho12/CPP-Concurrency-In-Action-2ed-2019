@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{function}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{make\PYGZus{}offseter}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{offset}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{[}\PYG{o}{=}\PYG{p}{](}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{j}\PYG{p}{)\PYGZob{}}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{offset}\PYG{o}{+}\PYG{n}{j}\PYG{p}{;\PYGZcb{};}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

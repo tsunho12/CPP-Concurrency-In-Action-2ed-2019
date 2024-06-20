@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}atomic\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}thread\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}assert.h\PYGZgt{}}
+
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{=}\PYG{n+nb}{false}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// x现在是一个非原子变量}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{z}\PYG{p}{;}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{write\PYGZus{}x\PYGZus{}then\PYGZus{}y}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{x}\PYG{o}{=}\PYG{n+nb}{true}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1 在栅栏前存储x}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic\PYGZus{}thread\PYGZus{}fence}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}release}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{y}\PYG{p}{.}\PYG{n}{store}\PYG{p}{(}\PYG{n+nb}{true}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 2 在栅栏后存储y}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{read\PYGZus{}y\PYGZus{}then\PYGZus{}x}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{y}\PYG{p}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 3 在\PYGZsh{}2写入前，持续等待}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic\PYGZus{}thread\PYGZus{}fence}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}acquire}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 4 这里读取到的值，是\PYGZsh{}1中写入}
+\PYG{+w}{    }\PYG{o}{++}\PYG{n}{z}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{x}\PYG{o}{=}\PYG{n+nb}{false}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{y}\PYG{o}{=}\PYG{n+nb}{false}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{z}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{(}\PYG{n}{write\PYGZus{}x\PYGZus{}then\PYGZus{}y}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{(}\PYG{n}{read\PYGZus{}y\PYGZus{}then\PYGZus{}x}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{a}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{b}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{assert}\PYG{p}{(}\PYG{n}{z}\PYG{p}{.}\PYG{n}{load}\PYG{p}{()}\PYG{o}{!=}\PYG{l+m+mi}{0}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 5 断言将不会触发}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

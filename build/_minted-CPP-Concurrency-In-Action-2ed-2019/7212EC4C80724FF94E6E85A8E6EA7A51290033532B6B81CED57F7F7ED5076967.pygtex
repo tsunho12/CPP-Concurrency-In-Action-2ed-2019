@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{fut}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{spawn\PYGZus{}async}\PYG{p}{(}\PYG{n}{some\PYGZus{}function}\PYG{p}{).}\PYG{n}{share}\PYG{p}{();}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{fut2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fut}\PYG{p}{.}\PYG{n}{then}\PYG{p}{([](}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{shared\PYGZus{}future}\PYG{o}{\PYGZlt{}}\PYG{n}{some\PYGZus{}data}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{do\PYGZus{}stuff}\PYG{p}{(}\PYG{n}{data}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{});}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{fut3}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fut}\PYG{p}{.}\PYG{n}{then}\PYG{p}{([](}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{shared\PYGZus{}future}\PYG{o}{\PYGZlt{}}\PYG{n}{some\PYGZus{}data}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{do\PYGZus{}other\PYGZus{}stuff}\PYG{p}{(}\PYG{n}{data}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{});}
+\end{Verbatim}

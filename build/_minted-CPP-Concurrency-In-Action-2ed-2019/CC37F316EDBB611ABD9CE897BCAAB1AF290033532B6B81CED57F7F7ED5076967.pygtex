@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{my\PYGZus{}data}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{;}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{process\PYGZus{}global\PYGZus{}data}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{my\PYGZus{}data}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{local}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic\PYGZus{}load}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{p}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{process\PYGZus{}data}\PYG{p}{(}\PYG{n}{local}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{update\PYGZus{}global\PYGZus{}data}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{my\PYGZus{}data}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{local}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{my\PYGZus{}data}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic\PYGZus{}store}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{p}\PYG{p}{,}\PYG{n}{local}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

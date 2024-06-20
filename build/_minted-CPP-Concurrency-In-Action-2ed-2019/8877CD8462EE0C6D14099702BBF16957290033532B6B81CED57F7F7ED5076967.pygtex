@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Clock}\PYG{p}{,}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Duration}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Clock}\PYG{o}{::}\PYG{n}{duration}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{time\PYGZus{}point}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Clock}\PYG{+w}{ }\PYG{n}{clock}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{Duration}\PYG{+w}{ }\PYG{n}{duration}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{duration}\PYG{o}{::}\PYG{n}{rep}\PYG{+w}{ }\PYG{n}{rep}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{duration}\PYG{o}{::}\PYG{n}{period}\PYG{+w}{ }\PYG{n}{period}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{time\PYGZus{}point}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{time\PYGZus{}point}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Duration2}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{n}{time\PYGZus{}point}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{time\PYGZus{}point}\PYG{o}{\PYGZlt{}}\PYG{n}{clock}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Duration2}\PYG{o}{\PYGZgt{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{n}{duration}\PYG{+w}{ }\PYG{n+nf}{time\PYGZus{}since\PYGZus{}epoch}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{time\PYGZus{}point}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{+=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{time\PYGZus{}point}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}=}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{duration}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{time\PYGZus{}point}\PYG{+w}{ }\PYG{n+nf}{min}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{time\PYGZus{}point}\PYG{+w}{ }\PYG{n+nf}{max}\PYG{p}{();}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

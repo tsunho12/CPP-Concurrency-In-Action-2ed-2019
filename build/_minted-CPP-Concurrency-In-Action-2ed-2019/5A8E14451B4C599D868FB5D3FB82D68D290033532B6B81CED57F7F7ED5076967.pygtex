@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{background\PYGZus{}task}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{k}{operator}\PYG{p}{()()}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{do\PYGZus{}something}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{do\PYGZus{}something\PYGZus{}else}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{background\PYGZus{}task}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{my\PYGZus{}thread}\PYG{p}{(}\PYG{n}{f}\PYG{p}{);}
+\end{Verbatim}

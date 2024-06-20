@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{CX}\PYG{+w}{ }\PYG{n}{si}\PYG{o}{=}\PYG{n}{half\PYGZus{}double}\PYG{p}{(}\PYG{n}{CX}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{,}\PYG{l+m+mi}{19}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 静态初始化}
+\end{Verbatim}

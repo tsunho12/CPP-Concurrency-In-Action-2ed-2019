@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{some\PYGZus{}resource}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{resource\PYGZus{}ptr}\PYG{p}{;}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{resource\PYGZus{}ptr}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{resource\PYGZus{}ptr}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{some\PYGZus{}resource}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{resource\PYGZus{}ptr}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{do\PYGZus{}something}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

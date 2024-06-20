@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{size}\PYG{o}{\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{test}
+\PYG{p}{\PYGZob{}\PYGZcb{};}
+\PYG{n}{test}\PYG{o}{\PYGZlt{}}\PYG{n}{bounds}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{ia}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 错误，bounds不是一个常量表达式}
+\PYG{n}{test}\PYG{o}{\PYGZlt{}}\PYG{n}{bounds2}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{ia2}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 正确，bounds2是一个常量表达式}
+\end{Verbatim}

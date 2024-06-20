@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}future\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{X}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n+nf}{bar}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{X}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f1}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{X}\PYG{o}{::}\PYG{n}{foo}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{x}\PYG{p}{,}\PYG{l+m+mi}{42}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}hello\PYGZdq{}}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 调用p\PYGZhy{}\PYGZgt{}foo(42, \PYGZdq{}hello\PYGZdq{})，p是指向x的指针}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f2}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{X}\PYG{o}{::}\PYG{n}{bar}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}goodbye\PYGZdq{}}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 调用tmpx.bar(\PYGZdq{}goodbye\PYGZdq{})， tmpx是x的拷贝副本}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{Y}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n+nf}{operator}\PYG{p}{()(}\PYG{k+kt}{double}\PYG{p}{);}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{Y}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{;}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f3}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{(),}\PYG{l+m+mf}{3.141}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 调用tmpy(3.141)，tmpy通过Y的移动构造函数得到}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f4}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ref}\PYG{p}{(}\PYG{n}{y}\PYG{p}{),}\PYG{l+m+mf}{2.718}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 调用y(2.718)}
+\PYG{n}{X}\PYG{+w}{ }\PYG{n+nf}{baz}\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{n}{baz}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ref}\PYG{p}{(}\PYG{n}{x}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 调用baz(x)}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{move\PYGZus{}only}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{delete}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{move\PYGZus{}only}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{delete}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{operator}\PYG{p}{()();}
+\PYG{p}{\PYGZcb{};}
+\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f5}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{async}\PYG{p}{(}\PYG{n}{move\PYGZus{}only}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 调用tmp()，tmp是通过std::move(move\PYGZus{}only())构造得到}
+\end{Verbatim}

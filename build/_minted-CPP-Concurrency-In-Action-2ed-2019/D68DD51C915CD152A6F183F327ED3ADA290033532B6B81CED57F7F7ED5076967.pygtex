@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{protected\PYGZus{}data}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{padding}\PYG{p}{[}\PYG{l+m+mi}{65536}\PYG{p}{];}\PYG{+w}{  }\PYG{c+c1}{// 如果你的编译器不支持std::hardware\PYGZus{}destructive\PYGZus{}interference\PYGZus{}size，可以使用类似65536字节，这个数字肯定超过一个缓存行}
+\PYG{+w}{  }\PYG{n}{my\PYGZus{}data}\PYG{+w}{ }\PYG{n}{data\PYGZus{}to\PYGZus{}protect}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

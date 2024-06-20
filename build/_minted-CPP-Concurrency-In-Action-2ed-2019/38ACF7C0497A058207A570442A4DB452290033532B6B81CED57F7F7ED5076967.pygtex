@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{f}\PYG{p}{.}\PYG{n}{clear}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}release}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{=}\PYG{n}{f}\PYG{p}{.}\PYG{n}{test\PYGZus{}and\PYGZus{}set}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\end{Verbatim}

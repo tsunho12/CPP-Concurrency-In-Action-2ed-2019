@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{offset}\PYG{o}{=}\PYG{l+m+mi}{42}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{function}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{offset\PYGZus{}a}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{j}\PYG{p}{)\PYGZob{}}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{offset}\PYG{o}{+}\PYG{n}{j}\PYG{p}{;\PYGZcb{};}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{n}{offset}\PYG{o}{=}\PYG{l+m+mi}{123}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{function}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{offset\PYGZus{}b}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{j}\PYG{p}{)\PYGZob{}}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{offset}\PYG{o}{+}\PYG{n}{j}\PYG{p}{;\PYGZcb{};}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{offset\PYGZus{}a}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{offset\PYGZus{}b}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{  }\PYG{n}{offset}\PYG{o}{=}\PYG{l+m+mi}{99}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{offset\PYGZus{}a}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{offset\PYGZus{}b}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

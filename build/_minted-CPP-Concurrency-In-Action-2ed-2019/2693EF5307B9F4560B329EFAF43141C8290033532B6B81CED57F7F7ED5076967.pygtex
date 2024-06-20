@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{push}\PYG{p}{(}\PYG{n}{T}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{counted\PYGZus{}node\PYGZus{}ptr}\PYG{+w}{ }\PYG{n}{new\PYGZus{}node}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{new\PYGZus{}node}\PYG{p}{.}\PYG{n}{ptr}\PYG{o}{=}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{node}\PYG{p}{(}\PYG{n}{data}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{new\PYGZus{}node}\PYG{p}{.}\PYG{n}{external\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{new\PYGZus{}node}\PYG{p}{.}\PYG{n}{ptr}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{o}{=}\PYG{n}{head}\PYG{p}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{head}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}weak}\PYG{p}{(}\PYG{n}{new\PYGZus{}node}\PYG{p}{.}\PYG{n}{ptr}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{,}\PYG{n}{new\PYGZus{}node}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}release}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{memory\PYGZus{}order\PYGZus{}relaxed}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

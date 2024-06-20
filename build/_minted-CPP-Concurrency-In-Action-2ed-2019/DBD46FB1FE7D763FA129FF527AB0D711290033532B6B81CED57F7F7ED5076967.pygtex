@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{node}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pop\PYGZus{}head}\PYG{p}{()}\PYG{+w}{ }\PYG{c+c1}{// 这是个有缺陷的实现}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{node}\PYG{o}{*}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{old\PYGZus{}tail}\PYG{o}{=}\PYG{n}{get\PYGZus{}tail}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 1 在head\PYGZus{}mutex范围外获取旧尾节点的值}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{head\PYGZus{}lock}\PYG{p}{(}\PYG{n}{head\PYGZus{}mutex}\PYG{p}{);}
+
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{head}\PYG{p}{.}\PYG{n}{get}\PYG{p}{()}\PYG{o}{==}\PYG{n}{old\PYGZus{}tail}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{node}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{old\PYGZus{}head}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{head}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{head}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{old\PYGZus{}head}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{my\PYGZus{}thread}\PYG{p}{(}\PYG{n}{background\PYGZus{}task}\PYG{p}{());}
+\end{Verbatim}

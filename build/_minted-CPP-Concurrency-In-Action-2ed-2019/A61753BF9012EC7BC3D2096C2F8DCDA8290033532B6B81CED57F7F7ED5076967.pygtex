@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}map\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}mutex\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}shared\PYGZus{}mutex\PYGZgt{}}
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{dns\PYGZus{}entry}\PYG{p}{;}
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{dns\PYGZus{}cache}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{,}\PYG{n}{dns\PYGZus{}entry}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{entries}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{mutable}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{+w}{ }\PYG{n}{entry\PYGZus{}mutex}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{dns\PYGZus{}entry}\PYG{+w}{ }\PYG{n}{find\PYGZus{}entry}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{domain}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{entry\PYGZus{}mutex}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{,}\PYG{n}{dns\PYGZus{}entry}\PYG{o}{\PYGZgt{}::}\PYG{n}{const\PYGZus{}iterator}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{it}\PYG{o}{=}
+\PYG{+w}{       }\PYG{n}{entries}\PYG{p}{.}\PYG{n}{find}\PYG{p}{(}\PYG{n}{domain}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{it}\PYG{o}{==}\PYG{n}{entries}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}\PYG{o}{?}\PYG{n}{dns\PYGZus{}entry}\PYG{p}{()}\PYG{o}{:}\PYG{n}{it}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{second}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{update\PYGZus{}or\PYGZus{}add\PYGZus{}entry}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{domain}\PYG{p}{,}
+\PYG{+w}{                           }\PYG{n}{dns\PYGZus{}entry}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{dns\PYGZus{}details}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}mutex}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lk}\PYG{p}{(}\PYG{n}{entry\PYGZus{}mutex}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 2}
+\PYG{+w}{    }\PYG{n}{entries}\PYG{p}{[}\PYG{n}{domain}\PYG{p}{]}\PYG{o}{=}\PYG{n}{dns\PYGZus{}details}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

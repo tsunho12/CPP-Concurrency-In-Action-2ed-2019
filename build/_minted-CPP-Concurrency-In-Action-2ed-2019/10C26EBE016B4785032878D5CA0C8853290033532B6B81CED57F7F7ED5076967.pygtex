@@ -1,0 +1,65 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{joining\PYGZus{}thread}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{joining\PYGZus{}thread}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{o}{=}\PYG{k}{default}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Callable}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Args}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{joining\PYGZus{}thread}\PYG{p}{(}\PYG{n}{Callable}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{func}\PYG{p}{,}\PYG{n}{Args}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{)}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{n}{Callable}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{func}\PYG{p}{),}\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{n}{Args}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{args}\PYG{p}{)...)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{explicit}\PYG{+w}{ }\PYG{n}{joining\PYGZus{}thread}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{t\PYGZus{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{t\PYGZus{}}\PYG{p}{))}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{joining\PYGZus{}thread}\PYG{p}{(}\PYG{n}{joining\PYGZus{}thread}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{other}\PYG{p}{.}\PYG{n}{t}\PYG{p}{))}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{joining\PYGZus{}thread}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{n}{joining\PYGZus{}thread}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{joinable}\PYG{p}{())\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{other}\PYG{p}{.}\PYG{n}{t}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{joining\PYGZus{}thread}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{joinable}\PYG{p}{())}
+\PYG{+w}{      }\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{t}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{other}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{o}{\PYGZti{}}\PYG{n}{joining\PYGZus{}thread}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{joinable}\PYG{p}{())}
+\PYG{+w}{    }\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{swap}\PYG{p}{(}\PYG{n}{joining\PYGZus{}thread}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{other}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{.}\PYG{n}{swap}\PYG{p}{(}\PYG{n}{other}\PYG{p}{.}\PYG{n}{t}\PYG{p}{);}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{id}\PYG{+w}{ }\PYG{n}{get\PYGZus{}id}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{.}\PYG{n}{get\PYGZus{}id}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{joinable}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{.}\PYG{n}{joinable}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{join}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{detach}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{t}\PYG{p}{.}\PYG{n}{detach}\PYG{p}{();}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{as\PYGZus{}thread}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{as\PYGZus{}thread}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

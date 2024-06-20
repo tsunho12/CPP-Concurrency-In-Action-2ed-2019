@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{std}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{chrono}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Rep}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Period}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ratio}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{o}{\PYGZgt{}\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{duration}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{template}\PYG{o}{\PYGZlt{}}
+\PYG{+w}{        }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Clock}\PYG{p}{,}
+\PYG{+w}{        }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Duration}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{Clock}\PYG{o}{::}\PYG{n}{duration}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{time\PYGZus{}point}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{system\PYGZus{}clock}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{steady\PYGZus{}clock}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{unspecified}\PYG{o}{\PYGZhy{}}\PYG{n}{clock}\PYG{o}{\PYGZhy{}}\PYG{n}{type}\PYG{+w}{ }\PYG{n}{high\PYGZus{}resolution\PYGZus{}clock}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

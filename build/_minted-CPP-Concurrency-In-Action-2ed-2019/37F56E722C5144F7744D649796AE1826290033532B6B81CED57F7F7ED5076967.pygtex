@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{spawn\PYGZus{}async\PYGZus{}task}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f}\PYG{o}{=}\PYG{n}{p}\PYG{p}{.}\PYG{n}{get\PYGZus{}future}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{t}\PYG{p}{([}\PYG{n}{p}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)]()\PYGZob{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{.}\PYG{n}{set\PYGZus{}value}\PYG{p}{(}\PYG{n}{find\PYGZus{}the\PYGZus{}answer}\PYG{p}{());\PYGZcb{});}
+\PYG{+w}{  }\PYG{n}{t}\PYG{p}{.}\PYG{n}{detach}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

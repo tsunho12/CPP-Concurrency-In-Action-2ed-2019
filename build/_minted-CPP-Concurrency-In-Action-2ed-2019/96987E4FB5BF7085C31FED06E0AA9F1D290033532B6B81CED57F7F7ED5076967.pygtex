@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{some\PYGZus{}data}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{p}{,}\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{some\PYGZus{}data}\PYG{o}{\PYGZgt{}\PYGZgt{}::}\PYG{n}{iterator}
+\PYG{+w}{      }\PYG{n}{iter}\PYG{o}{=}\PYG{n}{m}\PYG{p}{.}\PYG{n}{find}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}my key\PYGZdq{}}\PYG{p}{);}
+\end{Verbatim}

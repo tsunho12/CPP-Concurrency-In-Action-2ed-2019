@@ -1,0 +1,18 @@
+% ## 代码公约和下载
+
+为了区分普通文本，清单和正文中的所有代码都采用\texttt{"像这样的固定宽度的字体
+"}。许多清单都伴随着代码注释，突出显示重要的概念。在某些情况下，你可以通过页下给出的快捷链接进行查阅。
+
+本书所有实例的源代码，可在出版商的网站上进行下载：\url{www.manning.com/books/c-plus-plus-concurrency-in-action-second-edition}。
+
+你也可以从github上下载源码：\url{https://github.com/anthonywilliams/ccia_code_samples}。
+
+\mySubsubsection{}{软件需求}
+
+使用书中的代码，需要一个较新的C++编译器(要支持C++17语言的特性(见附录A))，还需要C++支持标准线程库。
+
+写本书的时候，最新版本的g++、clang++和Microsoft Visual Studio都对C++17的标准现成库进行了实现。他们也会支持附录中的大多数语言特性，那些目前还不被支持的特性也会逐渐被支持。
+
+我的公司Software Solutions Ltd，销售C++11标准线程库的完整实现，其可以使用在一些旧编译器上，以及为新版本的clang、gcc和Microsoft Visual Studio实现的并发技术标准\footnote[1]{The `just::thread` implementation of the C++ Standard Thread Library, http://www.stdthread.co.uk.}。这个线程库也可以用来测试本书中的例子。
+
+Boost线程库\footnote[2]{The Boost C++ library collection, http://www.boost.org.}提供的API，已经可移植到多个平台。本书中的大多数例子将\texttt{std::}替换为\texttt{boost::}，再\texttt{\#include}引用相应的头文件，就能使用Boost线程库来运行。新标准中，部分编译器可能还不支持(例如\texttt{std::async})，或在Boost线程库中有着不同名字(例如：\texttt{boost::unique\_future})。

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{);}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{count}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{for\PYGZus{}each}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{execution}\PYG{o}{::}\PYG{n}{seq}\PYG{p}{,}\PYG{n}{v}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{n}{v}\PYG{p}{.}\PYG{n}{end}\PYG{p}{(),}
+\PYG{+w}{  }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{k+kt}{int}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)\PYGZob{}}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{=++}\PYG{n}{count}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{});}
+\end{Verbatim}

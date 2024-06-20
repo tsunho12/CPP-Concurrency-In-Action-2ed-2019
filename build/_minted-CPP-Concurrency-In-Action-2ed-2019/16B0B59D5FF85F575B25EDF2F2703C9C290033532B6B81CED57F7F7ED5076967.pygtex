@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{CX}\PYG{+w}{ }\PYG{n+nf}{make\PYGZus{}cx}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{CX}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{CX}\PYG{+w}{ }\PYG{n+nf}{half\PYGZus{}double}\PYG{p}{(}\PYG{n}{CX}\PYG{+w}{ }\PYG{n}{old}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{CX}\PYG{p}{(}\PYG{n}{old}\PYG{p}{.}\PYG{n}{get\PYGZus{}a}\PYG{p}{()}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{old}\PYG{p}{.}\PYG{n}{get\PYGZus{}b}\PYG{p}{()}\PYG{o}{*}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{foo\PYGZus{}squared}\PYG{p}{(}\PYG{n}{CX}\PYG{+w}{ }\PYG{n}{val}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{square}\PYG{p}{(}\PYG{n}{val}\PYG{p}{.}\PYG{n}{foo}\PYG{p}{());}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{array}\PYG{p}{[}\PYG{n}{foo\PYGZus{}squared}\PYG{p}{(}\PYG{n}{half\PYGZus{}double}\PYG{p}{(}\PYG{n}{make\PYGZus{}cx}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)))];}\PYG{+w}{  }\PYG{c+c1}{// 49个元素}
+\end{Verbatim}

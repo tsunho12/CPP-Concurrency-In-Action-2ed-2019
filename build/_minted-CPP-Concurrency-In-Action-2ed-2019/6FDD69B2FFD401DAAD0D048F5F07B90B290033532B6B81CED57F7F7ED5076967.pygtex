@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 命名空间内的线程本地变量}
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{X}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 线程本地的静态成员变量}
+\PYG{p}{\PYGZcb{};}
+\PYG{k}{static}\PYG{+w}{ }\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{X}\PYG{o}{::}\PYG{n}{s}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 这里需要添加X::s}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 一般线程本地变量}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

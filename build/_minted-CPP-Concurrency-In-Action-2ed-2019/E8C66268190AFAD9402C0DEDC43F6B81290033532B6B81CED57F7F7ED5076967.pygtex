@@ -1,0 +1,67 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{FinalResult}\PYG{o}{\PYGZgt{}}
+\PYG{n}{find\PYGZus{}and\PYGZus{}process\PYGZus{}value}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{MyData}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{data}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{concurrency}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{o}{::}\PYG{n}{hardware\PYGZus{}concurrency}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{num\PYGZus{}tasks}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{concurrency}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{?}\PYG{+w}{ }\PYG{n}{concurrency}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{err}{；}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{MyData}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{results}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{auto}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}size}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{data}\PYG{p}{.}\PYG{n}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{num\PYGZus{}tasks}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{n}{num\PYGZus{}tasks}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}begin}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{done\PYGZus{}flag}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{(}\PYG{n+nb}{false}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{num\PYGZus{}tasks}\PYG{p}{;}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{)\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{+w}{    }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}end}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{      }\PYG{p}{(}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{num\PYGZus{}tasks}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{?}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}begin}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}size}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{.}\PYG{n}{end}\PYG{p}{());}
+\PYG{+w}{    }\PYG{n}{results}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{spawn\PYGZus{}async}\PYG{p}{([}\PYG{o}{=}\PYG{p}{]\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{// 2}
+\PYG{+w}{      }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{entry}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}begin}\PYG{p}{;}
+\PYG{+w}{           }\PYG{o}{!*}\PYG{n}{done\PYGZus{}flag}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{entry}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}end}\PYG{p}{);}
+\PYG{+w}{           }\PYG{o}{++}\PYG{n}{entry}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{matches\PYGZus{}find\PYGZus{}criteria}\PYG{p}{(}\PYG{o}{*}\PYG{n}{entry}\PYG{p}{))\PYGZob{}}
+\PYG{+w}{          }\PYG{o}{*}\PYG{n}{done\PYGZus{}flag}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{          }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{\PYGZam{}*}\PYG{n}{entry}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{MyData}\PYG{+w}{ }\PYG{o}{*}\PYG{p}{)}\PYG{k}{nullptr}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{    }\PYG{n}{chunk\PYGZus{}begin}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{chunk\PYGZus{}end}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{n}{FinalResult}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{final\PYGZus{}result}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{n}{FinalResult}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{DoneCheck}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{n}{FinalResult}\PYG{o}{\PYGZgt{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{n}{final\PYGZus{}result}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{DoneCheck}\PYG{p}{(}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{n}{FinalResult}\PYG{o}{\PYGZgt{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{n}{final\PYGZus{}result\PYGZus{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{final\PYGZus{}result}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{final\PYGZus{}result\PYGZus{}}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{k}{operator}\PYG{p}{()(}\PYG{+w}{ }\PYG{c+c1}{// 4}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{when\PYGZus{}any\PYGZus{}result}\PYG{o}{\PYGZlt{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{MyData}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}\PYGZgt{}\PYGZgt{}\PYGZgt{}}
+\PYG{+w}{        }\PYG{n}{results\PYGZus{}param}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{results}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{results\PYGZus{}param}\PYG{p}{.}\PYG{n}{get}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{MyData}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{ready\PYGZus{}result}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{      }\PYG{n}{results}\PYG{p}{.}\PYG{n}{futures}\PYG{p}{[}\PYG{n}{results}\PYG{p}{.}\PYG{n}{index}\PYG{p}{].}\PYG{n}{get}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 5}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{ready\PYGZus{}result}\PYG{p}{)}
+\PYG{+w}{      }\PYG{n}{final\PYGZus{}result}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{set\PYGZus{}value}\PYG{p}{(}\PYG{+w}{ }\PYG{c+c1}{// 6}
+\PYG{+w}{        }\PYG{n}{process\PYGZus{}found\PYGZus{}value}\PYG{p}{(}\PYG{o}{*}\PYG{n}{ready\PYGZus{}result}\PYG{p}{));}
+\PYG{+w}{    }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{results}\PYG{p}{.}\PYG{n}{futures}\PYG{p}{.}\PYG{n}{erase}\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{results}\PYG{p}{.}\PYG{n}{futures}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{results}\PYG{p}{.}\PYG{n}{index}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 7}
+\PYG{+w}{      }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{results}\PYG{p}{.}\PYG{n}{futures}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{when\PYGZus{}any}\PYG{p}{(}\PYG{+w}{ }\PYG{c+c1}{// 8}
+\PYG{+w}{          }\PYG{n}{results}\PYG{p}{.}\PYG{n}{futures}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{results}\PYG{p}{.}\PYG{n}{futures}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}
+\PYG{+w}{          }\PYG{p}{.}\PYG{n}{then}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{o}{*}\PYG{k}{this}\PYG{p}{));}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{final\PYGZus{}result}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{set\PYGZus{}exception}\PYG{p}{(}
+\PYG{+w}{          }\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}exception\PYGZus{}ptr}\PYG{p}{(}\PYG{+w}{ }\PYG{c+c1}{// 9}
+\PYG{+w}{            }\PYG{n}{std}\PYG{o}{::}\PYG{n}{runtime\PYGZus{}error}\PYG{p}{(}\PYG{err}{“}\PYG{n}{Not}\PYG{+w}{ }\PYG{n}{found}\PYG{err}{”}\PYG{p}{)));}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{};}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{experimental}\PYG{o}{::}\PYG{n}{when\PYGZus{}any}\PYG{p}{(}\PYG{n}{results}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{results}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}
+\PYG{+w}{  }\PYG{p}{.}\PYG{n}{then}\PYG{p}{(}\PYG{n}{DoneCheck}\PYG{p}{(}\PYG{n}{final\PYGZus{}result}\PYG{p}{));}\PYG{+w}{ }\PYG{c+c1}{// 3}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{final\PYGZus{}result}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{get\PYGZus{}future}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 10}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

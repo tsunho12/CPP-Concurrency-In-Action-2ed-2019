@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{lock\PYGZus{}free\PYGZus{}stack}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{unsigned}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{threads\PYGZus{}in\PYGZus{}pop}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1 原子变量}
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{try\PYGZus{}reclaim}\PYG{p}{(}\PYG{n}{node}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{old\PYGZus{}head}\PYG{p}{);}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pop}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{o}{++}\PYG{n}{threads\PYGZus{}in\PYGZus{}pop}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 2 在做事之前，计数值加1}
+\PYG{+w}{    }\PYG{n}{node}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{old\PYGZus{}head}\PYG{o}{=}\PYG{n}{head}\PYG{p}{.}\PYG{n}{load}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{while}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}
+\PYG{+w}{      }\PYG{o}{!}\PYG{n}{head}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}weak}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{p}{,}\PYG{n}{old\PYGZus{}head}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{));}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{res}\PYG{p}{.}\PYG{n}{swap}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{data}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 3 回收删除的节点}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{try\PYGZus{}reclaim}\PYG{p}{(}\PYG{n}{old\PYGZus{}head}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 4 从节点中直接提取数据，而非拷贝指针}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

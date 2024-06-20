@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{45}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// ok}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}hello\PYGZdq{}}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 错误，std::string不是字面类型}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{();}
+\PYG{k}{constexpr}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{j}\PYG{o}{=}\PYG{n}{foo}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// 错误，foo()没有声明为constexpr}
+\end{Verbatim}

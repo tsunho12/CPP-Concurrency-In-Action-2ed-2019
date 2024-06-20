@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{try}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{do\PYGZus{}something}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{catch}\PYG{p}{(}\PYG{n}{thread\PYGZus{}interrupted}\PYG{o}{\PYGZam{}}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{handle\PYGZus{}interruption}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

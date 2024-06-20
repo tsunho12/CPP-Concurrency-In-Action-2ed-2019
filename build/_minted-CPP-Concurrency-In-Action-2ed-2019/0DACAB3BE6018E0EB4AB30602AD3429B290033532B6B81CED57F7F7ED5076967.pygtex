@@ -1,0 +1,74 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{bank\PYGZus{}machine}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{messaging}\PYG{o}{::}\PYG{n}{receiver}\PYG{+w}{ }\PYG{n}{incoming}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{n}{balance}\PYG{p}{;}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{bank\PYGZus{}machine}\PYG{p}{()}\PYG{o}{:}
+
+\PYG{+w}{  }\PYG{n}{balance}\PYG{p}{(}\PYG{l+m+mi}{199}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{done}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{get\PYGZus{}sender}\PYG{p}{().}\PYG{n}{send}\PYG{p}{(}\PYG{n}{messaging}\PYG{o}{::}\PYG{n}{close\PYGZus{}queue}\PYG{p}{());}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{run}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{try}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{for}\PYG{p}{(;;)}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{incoming}\PYG{p}{.}\PYG{n}{wait}\PYG{p}{()}
+\PYG{+w}{          }\PYG{p}{.}\PYG{n}{handle}\PYG{o}{\PYGZlt{}}\PYG{n}{verify\PYGZus{}pin}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{           }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{verify\PYGZus{}pin}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{+w}{           }\PYG{p}{\PYGZob{}}
+\PYG{+w}{             }\PYG{k}{if}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{.}\PYG{n}{pin}\PYG{o}{==}\PYG{l+s}{\PYGZdq{}1937\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{             }\PYG{p}{\PYGZob{}}
+\PYG{+w}{               }\PYG{n}{msg}\PYG{p}{.}\PYG{n}{atm\PYGZus{}queue}\PYG{p}{.}\PYG{n}{send}\PYG{p}{(}\PYG{n}{pin\PYGZus{}verified}\PYG{p}{());}
+\PYG{+w}{             }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{             }\PYG{k}{else}
+\PYG{+w}{             }\PYG{p}{\PYGZob{}}
+\PYG{+w}{               }\PYG{n}{msg}\PYG{p}{.}\PYG{n}{atm\PYGZus{}queue}\PYG{p}{.}\PYG{n}{send}\PYG{p}{(}\PYG{n}{pin\PYGZus{}incorrect}\PYG{p}{());}
+\PYG{+w}{             }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{           }\PYG{p}{\PYGZcb{})}
+\PYG{+w}{          }\PYG{p}{.}\PYG{n}{handle}\PYG{o}{\PYGZlt{}}\PYG{n}{withdraw}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{           }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{withdraw}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{+w}{           }\PYG{p}{\PYGZob{}}
+\PYG{+w}{             }\PYG{k}{if}\PYG{p}{(}\PYG{n}{balance}\PYG{o}{\PYGZgt{}=}\PYG{n}{msg}\PYG{p}{.}\PYG{n}{amount}\PYG{p}{)}
+\PYG{+w}{             }\PYG{p}{\PYGZob{}}
+\PYG{+w}{               }\PYG{n}{msg}\PYG{p}{.}\PYG{n}{atm\PYGZus{}queue}\PYG{p}{.}\PYG{n}{send}\PYG{p}{(}\PYG{n}{withdraw\PYGZus{}ok}\PYG{p}{());}
+\PYG{+w}{               }\PYG{n}{balance}\PYG{o}{\PYGZhy{}=}\PYG{n}{msg}\PYG{p}{.}\PYG{n}{amount}\PYG{p}{;}
+\PYG{+w}{             }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{             }\PYG{k}{else}
+\PYG{+w}{             }\PYG{p}{\PYGZob{}}
+\PYG{+w}{               }\PYG{n}{msg}\PYG{p}{.}\PYG{n}{atm\PYGZus{}queue}\PYG{p}{.}\PYG{n}{send}\PYG{p}{(}\PYG{n}{withdraw\PYGZus{}denied}\PYG{p}{());}
+\PYG{+w}{             }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{           }\PYG{p}{\PYGZcb{})}
+\PYG{+w}{          }\PYG{p}{.}\PYG{n}{handle}\PYG{o}{\PYGZlt{}}\PYG{n}{get\PYGZus{}balance}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{           }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{get\PYGZus{}balance}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{+w}{           }\PYG{p}{\PYGZob{}}
+\PYG{+w}{             }\PYG{n}{msg}\PYG{p}{.}\PYG{n}{atm\PYGZus{}queue}\PYG{p}{.}\PYG{n}{send}\PYG{p}{(}\PYG{o}{::}\PYG{n}{balance}\PYG{p}{(}\PYG{n}{balance}\PYG{p}{));}
+\PYG{+w}{           }\PYG{p}{\PYGZcb{})}
+\PYG{+w}{          }\PYG{p}{.}\PYG{n}{handle}\PYG{o}{\PYGZlt{}}\PYG{n}{withdrawal\PYGZus{}processed}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{           }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{withdrawal\PYGZus{}processed}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{+w}{           }\PYG{p}{\PYGZob{}}
+\PYG{+w}{           }\PYG{p}{\PYGZcb{})}
+\PYG{+w}{          }\PYG{p}{.}\PYG{n}{handle}\PYG{o}{\PYGZlt{}}\PYG{n}{cancel\PYGZus{}withdrawal}\PYG{o}{\PYGZgt{}}\PYG{p}{(}
+\PYG{+w}{           }\PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{](}\PYG{n}{cancel\PYGZus{}withdrawal}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{+w}{           }\PYG{p}{\PYGZob{}}
+\PYG{+w}{           }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{catch}\PYG{p}{(}\PYG{n}{messaging}\PYG{o}{::}\PYG{n}{close\PYGZus{}queue}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{n}{messaging}\PYG{o}{::}\PYG{n}{sender}\PYG{+w}{ }\PYG{n}{get\PYGZus{}sender}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{incoming}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

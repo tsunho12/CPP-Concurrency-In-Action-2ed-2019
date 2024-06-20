@@ -1,0 +1,59 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{thread\PYGZus{}pool}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{thread\PYGZus{}safe\PYGZus{}queue}\PYG{o}{\PYGZlt{}}\PYG{n}{function\PYGZus{}wrapper}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pool\PYGZus{}work\PYGZus{}queue}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{queue}\PYG{o}{\PYGZlt{}}\PYG{n}{function\PYGZus{}wrapper}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{local\PYGZus{}queue\PYGZus{}type}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{thread\PYGZus{}local}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{local\PYGZus{}queue\PYGZus{}type}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 2}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{worker\PYGZus{}thread}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{local\PYGZus{}queue\PYGZus{}type}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 3}
+\PYG{+w}{    }\PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{done}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{run\PYGZus{}pending\PYGZus{}task}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{  }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{FunctionType}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{  }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{std}\PYG{o}{::}\PYG{n}{result\PYGZus{}of}\PYG{o}{\PYGZlt{}}\PYG{n}{FunctionType}\PYG{p}{()}\PYG{o}{\PYGZgt{}::}\PYG{n}{type}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{n}{submit}\PYG{p}{(}\PYG{n}{FunctionType}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{typedef}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{std}\PYG{o}{::}\PYG{n}{result\PYGZus{}of}\PYG{o}{\PYGZlt{}}\PYG{n}{FunctionType}\PYG{p}{()}\PYG{o}{\PYGZgt{}::}\PYG{n}{type}\PYG{+w}{ }\PYG{n}{result\PYGZus{}type}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{packaged\PYGZus{}task}\PYG{o}{\PYGZlt{}}\PYG{n}{result\PYGZus{}type}\PYG{p}{()}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{task}\PYG{p}{(}\PYG{n}{f}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{n}{result\PYGZus{}type}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{(}\PYG{n}{task}\PYG{p}{.}\PYG{n}{get\PYGZus{}future}\PYG{p}{());}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{// 4}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{push}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{task}\PYG{p}{));}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{pool\PYGZus{}work\PYGZus{}queue}\PYG{p}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{task}\PYG{p}{));}\PYG{+w}{  }\PYG{c+c1}{// 5}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{run\PYGZus{}pending\PYGZus{}task}\PYG{p}{()}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{function\PYGZus{}wrapper}\PYG{+w}{ }\PYG{n}{task}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{o}{!}\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{empty}\PYG{p}{())}\PYG{+w}{  }\PYG{c+c1}{// 6}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{task}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{front}\PYG{p}{());}
+\PYG{+w}{      }\PYG{n}{local\PYGZus{}work\PYGZus{}queue}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{pop}\PYG{p}{();}
+\PYG{+w}{      }\PYG{n}{task}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n}{pool\PYGZus{}work\PYGZus{}queue}\PYG{p}{.}\PYG{n}{try\PYGZus{}pop}\PYG{p}{(}\PYG{n}{task}\PYG{p}{))}\PYG{+w}{  }\PYG{c+c1}{// 7}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{task}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{std}\PYG{o}{::}\PYG{n}{this\PYGZus{}thread}\PYG{o}{::}\PYG{n}{yield}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{// rest as before}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

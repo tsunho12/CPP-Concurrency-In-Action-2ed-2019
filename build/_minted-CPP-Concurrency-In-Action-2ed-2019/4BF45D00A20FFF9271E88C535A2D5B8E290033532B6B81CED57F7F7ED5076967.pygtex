@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{X}\PYG{o}{::}\PYG{n}{X}\PYG{p}{()}\PYG{o}{:}\PYG{n}{a}\PYG{p}{()\PYGZob{}\PYGZcb{}}\PYG{+w}{  }\PYG{c+c1}{// a == 0}
+\PYG{n}{X}\PYG{o}{::}\PYG{n}{X}\PYG{p}{()}\PYG{o}{:}\PYG{n}{a}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{)\PYGZob{}\PYGZcb{}}\PYG{+w}{  }\PYG{c+c1}{// a == 42}
+\PYG{n}{X}\PYG{o}{::}\PYG{n}{X}\PYG{p}{()\PYGZob{}\PYGZcb{}}\PYG{+w}{  }\PYG{c+c1}{// 1}
+\end{Verbatim}

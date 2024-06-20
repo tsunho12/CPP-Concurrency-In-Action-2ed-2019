@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{mapped\PYGZus{}type}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}value}\PYG{p}{(}\PYG{n}{key\PYGZus{}type}\PYG{+w}{ }\PYG{k}{const}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mapped\PYGZus{}type}\PYG{+w}{ }\PYG{n}{default\PYGZus{}value}\PYG{p}{);}
+\end{Verbatim}

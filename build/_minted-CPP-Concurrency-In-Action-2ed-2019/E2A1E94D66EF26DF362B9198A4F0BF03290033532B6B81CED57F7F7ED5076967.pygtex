@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{f}\PYG{o}{=}\PYG{p}{[](}\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)\PYGZob{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{}x=\PYGZdq{}}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{x}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;\PYGZcb{};}
-\PYG{n}{f}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// x is of type int; outputs \PYGZdq{}x=42\PYGZdq{}}
-\PYG{n}{f}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}hello\PYGZdq{}}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// x is of type const char*; outputs \PYGZdq{}x=hello\PYGZdq{}}
-\end{Verbatim}

@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic\PYGZus{}flag}\PYG{+w}{ }\PYG{n}{f}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ATOMIC\PYGZus{}FLAG\PYGZus{}INIT}\PYG{p}{;}
-\end{Verbatim}

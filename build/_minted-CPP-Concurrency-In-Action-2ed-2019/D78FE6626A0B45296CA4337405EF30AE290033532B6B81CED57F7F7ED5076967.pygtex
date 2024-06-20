@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n+nf}{my\PYGZus{}thread}\PYG{p}{((}\PYG{n}{background\PYGZus{}task}\PYG{p}{()));}\PYG{+w}{  }\PYG{c+c1}{// 1}
-\PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{+w}{ }\PYG{n}{my\PYGZus{}thread}\PYG{p}{\PYGZob{}}\PYG{n}{background\PYGZus{}task}\PYG{p}{()\PYGZcb{};}\PYG{+w}{    }\PYG{c+c1}{// 2}
-\end{Verbatim}

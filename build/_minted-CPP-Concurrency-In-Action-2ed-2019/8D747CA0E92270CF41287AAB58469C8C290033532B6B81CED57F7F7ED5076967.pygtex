@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{using}\PYG{+w}{ }\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{std}\PYG{o}{::}\PYG{n+nn}{chrono\PYGZus{}literals}\PYG{p}{;}
-\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{one\PYGZus{}day}\PYG{o}{=}\PYG{l+m+mi}{24}\PYG{n}{h}\PYG{p}{;}
-\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{half\PYGZus{}an\PYGZus{}hour}\PYG{o}{=}\PYG{l+m+mi}{30}\PYG{n}{min}\PYG{p}{;}
-\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{max\PYGZus{}time\PYGZus{}between\PYGZus{}messages}\PYG{o}{=}\PYG{l+m+mi}{30}\PYG{n}{ms}\PYG{p}{;}
-\end{Verbatim}

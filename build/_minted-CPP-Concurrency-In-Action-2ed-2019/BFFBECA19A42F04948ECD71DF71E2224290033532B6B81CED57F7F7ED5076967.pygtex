@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{foo}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// 错误，int重载声明已经删除}
-\PYG{n}{foo}\PYG{p}{((}\PYG{k+kt}{short}\PYG{p}{)}\PYG{l+m+mi}{42}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// OK}
-\end{Verbatim}

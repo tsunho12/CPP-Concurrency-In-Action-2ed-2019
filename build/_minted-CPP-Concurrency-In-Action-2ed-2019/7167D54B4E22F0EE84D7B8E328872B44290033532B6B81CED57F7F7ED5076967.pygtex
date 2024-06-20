@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{atomic}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{;}
-\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{expected}\PYG{p}{;}
-\PYG{n}{b}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}weak}\PYG{p}{(}\PYG{n}{expected}\PYG{p}{,}\PYG{n+nb}{true}\PYG{p}{,}
-\PYG{+w}{  }\PYG{n}{memory\PYGZus{}order\PYGZus{}acq\PYGZus{}rel}\PYG{p}{,}\PYG{n}{memory\PYGZus{}order\PYGZus{}acquire}\PYG{p}{);}
-\PYG{n}{b}\PYG{p}{.}\PYG{n}{compare\PYGZus{}exchange\PYGZus{}weak}\PYG{p}{(}\PYG{n}{expected}\PYG{p}{,}\PYG{n+nb}{true}\PYG{p}{,}\PYG{n}{memory\PYGZus{}order\PYGZus{}acq\PYGZus{}rel}\PYG{p}{);}
-\end{Verbatim}

@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{X}\PYG{+w}{ }\PYG{n}{x1}\PYG{p}{;}
-\PYG{n}{X}\PYG{+w}{ }\PYG{n}{x2}\PYG{o}{=}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{x1}\PYG{p}{);}
-\PYG{n}{X}\PYG{+w}{ }\PYG{n}{x3}\PYG{o}{=}\PYG{k}{static\PYGZus{}cast}\PYG{o}{\PYGZlt{}}\PYG{n}{X}\PYG{o}{\PYGZam{}\PYGZam{}\PYGZgt{}}\PYG{p}{(}\PYG{n}{x2}\PYG{p}{);}
-\end{Verbatim}

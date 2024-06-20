@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{duration}\PYG{+w}{ }\PYG{n+nf}{temp}\PYG{p}{(}\PYG{o}{*}\PYG{k}{this}\PYG{p}{);}
-\PYG{o}{++}\PYG{p}{(}\PYG{o}{*}\PYG{k}{this}\PYG{p}{);}
-\PYG{k}{return}\PYG{+w}{ }\PYG{n}{temp}\PYG{p}{;}
-\end{Verbatim}

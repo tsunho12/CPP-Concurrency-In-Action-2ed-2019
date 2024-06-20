@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{promise}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{;}
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{(}\PYG{n}{p}\PYG{p}{.}\PYG{n}{get\PYGZus{}future}\PYG{p}{());}
-\PYG{n}{assert}\PYG{p}{(}\PYG{n}{f}\PYG{p}{.}\PYG{n}{valid}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 1 期望值 f 是合法的}
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}future}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sf}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{f}\PYG{p}{));}
-\PYG{n}{assert}\PYG{p}{(}\PYG{o}{!}\PYG{n}{f}\PYG{p}{.}\PYG{n}{valid}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 2 期望值 f 现在是不合法的}
-\PYG{n}{assert}\PYG{p}{(}\PYG{n}{sf}\PYG{p}{.}\PYG{n}{valid}\PYG{p}{());}\PYG{+w}{  }\PYG{c+c1}{// 3 sf 现在是合法的}
-\end{Verbatim}

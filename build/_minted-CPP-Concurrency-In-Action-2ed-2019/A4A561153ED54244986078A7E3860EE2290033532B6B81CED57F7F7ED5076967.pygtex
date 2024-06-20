@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{CallableType}\PYG{p}{,}\PYG{k}{typename}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Args}\PYG{o}{\PYGZgt{}}
-\PYG{k+kr}{thread}\PYG{o}{::}\PYG{k+kr}{thread}\PYG{p}{(}\PYG{n}{CallableType}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{func}\PYG{p}{,}\PYG{n}{Args}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{p}{...}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{);}
-\end{Verbatim}

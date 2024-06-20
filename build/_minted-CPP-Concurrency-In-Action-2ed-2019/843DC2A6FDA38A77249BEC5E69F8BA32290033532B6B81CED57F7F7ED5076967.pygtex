@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{internal\PYGZus{}count}\PYG{o}{\PYGZpc{}=}\PYG{n}{rhs}\PYG{p}{.}\PYG{n}{count}\PYG{p}{();}
-\end{Verbatim}

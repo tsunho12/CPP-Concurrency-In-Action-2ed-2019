@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
-\PYG{n}{std}\PYG{o}{::}\PYG{n}{lock\PYGZus{}guard}\PYG{+w}{ }\PYG{n+nf}{guard}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 推断出std::lock\PYGZus{}guard\PYGZlt{}std::mutex\PYGZgt{}}
-\end{Verbatim}

@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{foo}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZam{}\PYGZgt{}}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// void foo\PYGZlt{}int\PYGZam{}\PYGZgt{}(int\PYGZam{} t);}
-\end{Verbatim}

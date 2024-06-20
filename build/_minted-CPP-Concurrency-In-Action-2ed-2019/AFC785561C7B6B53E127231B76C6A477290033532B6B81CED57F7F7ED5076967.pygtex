@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{constexpr}\PYG{+w}{ }\PYG{n}{CX}\PYG{+w}{ }\PYG{n+nf}{create\PYGZus{}cx}\PYG{p}{()}
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{CX}\PYG{p}{();}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

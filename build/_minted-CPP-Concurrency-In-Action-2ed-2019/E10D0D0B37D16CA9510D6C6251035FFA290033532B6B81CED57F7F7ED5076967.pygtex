@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{count}\PYG{p}{()}\PYG{o}{==}\PYG{k}{static\PYGZus{}cast}\PYG{o}{\PYGZlt{}}\PYG{n}{rep}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{r}\PYG{p}{)}
-\end{Verbatim}

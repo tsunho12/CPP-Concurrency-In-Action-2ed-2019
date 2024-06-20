@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout
 
       - name: Set up LaTeX
-        uses: dante-ev/latex-action@v2
+        uses: dante-ev/latex-action
         with:
           root_file: main.tex
 

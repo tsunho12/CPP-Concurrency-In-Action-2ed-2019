@@ -23,7 +23,7 @@ public:
 };
 \end{cpp}
 
-类内部可以使用\texttt{std::thread}来管理线程，并且使用一些自定义数据结构来处理中断。现在，从线程的角度能看到什么呢？“能用这个类来中断线程”——需要一个断点(*interruption point*)。在不添加多余的数据的前提下，为了使断点能够正常使用，就需要使用一个没有参数的函数：interruption\_point()。这意味着中断数据结构可以访问thread\_local变量，并在线程运行时，对变量进行设置，因此当线程调用interruption\_point()时，就会去检查当前运行线程的数据结构。
+类内部可以使用\texttt{std::thread}来管理线程，并且使用一些自定义数据结构来处理中断。现在，从线程的角度能看到什么呢？“能用这个类来中断线程”——需要一个断点(\textit{interruption point})。在不添加多余的数据的前提下，为了使断点能够正常使用，就需要使用一个没有参数的函数：interruption\_point()。这意味着中断数据结构可以访问thread\_local变量，并在线程运行时，对变量进行设置，因此当线程调用interruption\_point()时，就会去检查当前运行线程的数据结构。
 
 thread\_local标志是不能使用普通的\texttt{std::thread}管理线程的主要原因，需要使用一种方法分配出一个可访问的interruptible\_thread实例，就像新启动一个线程一样。使用已提供函数来做这件事情前，需要将interruptible\_thread实例传递给\texttt{std::thread}的构造函数，创建一个能够执行的线程，就像下面的代码所实现。
 
@@ -327,7 +327,7 @@ catch(thread_interrupted&)
 }
 \end{cpp}
 
-捕获中断进行处理，其他线程再次调用interrupt()时，线程将会再次被中断，这就被称为*断点*(interruption point)。如果线程执行的是一系列独立的任务，就会需要断点。中断一个任务，就意味着丢弃这个任务，并且该线程会执行任务列表中的其他任务。
+捕获中断进行处理，其他线程再次调用interrupt()时，线程将会再次被中断，这就被称为\textit{断点}(interruption point)。如果线程执行的是一系列独立的任务，就会需要断点。中断一个任务，就意味着丢弃这个任务，并且该线程会执行任务列表中的其他任务。
 
 因为thread\_interrupted是一个异常，在能够被中断的代码中，之前线程安全的注意事项都是适用的，为了确保资源不会泄露，并在数据结构中留下对应的退出状态。通常，线程中断是可行的，所以只需要让异常传播即可。不过，当异常传入\texttt{std::thread}的析构函数时，将会调用\texttt{std::terminate()}，并且整个程序将会终止。为了避免这种情况，需要将interruptible\_thread变量作为参数传入的函数中放置catch(thread\_interrupted)处理块，可以将catch块包装进interrupt\_flag的初始化过程中。因为异常将会终止独立进程，这样就能保证未处理的中断是异常安全的。interruptible\_thread构造函数中对线程的初始化，实现如下：
 

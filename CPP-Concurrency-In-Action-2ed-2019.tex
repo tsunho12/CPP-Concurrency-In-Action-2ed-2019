@@ -1,7 +1,7 @@
 
 \documentclass[11pt,a4paper,UTF8]{book}
 
-\usepackage[outputdir=build]{minted}
+\usepackage{minted}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{authblk}
@@ -83,7 +83,8 @@
 \usepackage{pagecolor}
 
 % 设置护眼绿色
-\definecolor{mygreen}{RGB}{199, 237, 204}
+% \definecolor{mygreen}{RGB}{199, 237, 204}
+\definecolor{mygreen}{RGB}{240, 248, 255}
 \pagecolor{mygreen}
 
 
@@ -420,7 +421,7 @@
 			%\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{cover.jpg}
 			\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
 				\node at (current page.center)
-				{\includegraphics[width=\paperwidth, keepaspectratio=false]{cover.jpg}};
+				{\includegraphics[width=\paperwidth,height=\paperheight, keepaspectratio=false]{cover.jpg}};
 			\end{tikzpicture}
 			\newpage
 			\thispagestyle{empty}
@@ -551,7 +552,7 @@
 		\mySubsection{11.3.}{本章总结}{content/chapter11/3.tex}
 		\newpage
 
-		\mySection{附录A}{对C++11特性的简要介绍}{content/appendix_A/0.tex}
+		\mySection{附录A}{对C++11 特性的简要介绍}{content/appendix_A/0.tex}
 		\mySubsection{A.1.}{右值引用}{content/appendix_A/1.tex}
 		\mySubsection{A.2.}{删除函数}{content/appendix_A/2.tex}
 		\mySubsection{A.3.}{右值引用}{content/appendix_A/3.tex}
